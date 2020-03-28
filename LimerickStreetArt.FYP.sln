@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickStreetArt", "LimerickStreetArt\LimerickStreetArt.csproj", "{CA0FB6C0-C210-4348-9D43-89FDE4DAEB80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimerickStreetArt", "LimerickStreetArt\LimerickStreetArt.csproj", "{CA0FB6C0-C210-4348-9D43-89FDE4DAEB80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickStreetArt.MySQL", "LimerickStreetArt.MySQL\LimerickStreetArt.MySQL.csproj", "{C5AA00FF-D608-4093-8329-B8F392CA2CBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimerickStreetArt.MySQL", "LimerickStreetArt.MySQL\LimerickStreetArt.MySQL.csproj", "{C5AA00FF-D608-4093-8329-B8F392CA2CBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickStreetArt.MySQL.UnitTests", "LimerickStreetArt.MySQL.UnitTests\LimerickStreetArt.MySQL.UnitTests.csproj", "{74B42C7C-08DD-4421-A342-D865C890A186}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimerickStreetArt.MySQL.UnitTests", "LimerickStreetArt.MySQL.UnitTests\LimerickStreetArt.MySQL.UnitTests.csproj", "{74B42C7C-08DD-4421-A342-D865C890A186}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickStreetArt.SQLite", "LimerickStreetArt.SQLite\LimerickStreetArt.SQLite.csproj", "{9992C195-85CF-432A-9D61-096ECB8A68C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimerickStreetArt.SQLite", "LimerickStreetArt.SQLite\LimerickStreetArt.SQLite.csproj", "{9992C195-85CF-432A-9D61-096ECB8A68C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "assests.documentation", "assests.documentation\assests.documentation.csproj", "{3F7974C0-9FC7-4001-A997-FDCDEDBD261E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "assests.documentation", "assests.documentation\assests.documentation.csproj", "{3F7974C0-9FC7-4001-A997-FDCDEDBD261E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickStreetArt.Web", "LimerickStreetArt.Web\LimerickStreetArt.Web.csproj", "{C81DA2E2-3647-453F-A667-5CF3615D10E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{3F7974C0-9FC7-4001-A997-FDCDEDBD261E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F7974C0-9FC7-4001-A997-FDCDEDBD261E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F7974C0-9FC7-4001-A997-FDCDEDBD261E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C81DA2E2-3647-453F-A667-5CF3615D10E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C81DA2E2-3647-453F-A667-5CF3615D10E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C81DA2E2-3647-453F-A667-5CF3615D10E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C81DA2E2-3647-453F-A667-5CF3615D10E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

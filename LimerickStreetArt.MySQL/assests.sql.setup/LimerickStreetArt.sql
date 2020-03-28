@@ -22,9 +22,35 @@ CREATE TABLE IF NOT EXISTS `LimerickStreetArt`.`UserAccount` (
   `Username` VARCHAR(45) NOT NULL,
   `Email` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
+  `Active` TINYINT NOT NULL,
+  `UserAccountcol` TINYINT NOT NULL,
+  `DateOfBirth` DATE NOT NULL,
+  `AccessLevel` INT NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE INDEX `Username_UNIQUE` (`Username` ASC) VISIBLE,
   UNIQUE INDEX `Email_UNIQUE` (`Email` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `LimerickStreetArt`.`StreetArt`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `LimerickStreetArt`.`StreetArt` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `GpsLatitude` FLOAT(10,8) NOT NULL,
+  `GpsLongitude` FLOAT(10,8) NOT NULL,
+  `Title` VARCHAR(45) NOT NULL,
+  `Street` VARCHAR(45) NULL,
+  `Timestamp` DATETIME NOT NULL,
+  `Image` MEDIUMBLOB NOT NULL,
+  `UserAccountId` INT NOT NULL,
+  PRIMARY KEY (`Id`),
+  INDEX `fk_StreetArt_UserAccount_idx` (`UserAccountId` ASC) VISIBLE,
+  CONSTRAINT `fk_StreetArt_UserAccount`
+    FOREIGN KEY (`UserAccountId`)
+    REFERENCES `LimerickStreetArt`.`UserAccount` (`Id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
