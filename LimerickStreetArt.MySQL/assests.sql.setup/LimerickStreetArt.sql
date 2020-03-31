@@ -1,4 +1,4 @@
-﻿-- MySQL Workbench Forward Engineering
+-- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,6 @@ CREATE TABLE IF NOT EXISTS `LimerickStreetArt`.`UserAccount` (
   `Email` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(45) NOT NULL,
   `Active` TINYINT NOT NULL,
-  `UserAccountcol` TINYINT NOT NULL,
   `DateOfBirth` DATE NOT NULL,
   `AccessLevel` INT NOT NULL,
   PRIMARY KEY (`Id`),

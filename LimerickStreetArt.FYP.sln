@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimerickStreetArt.SQLite", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "assests.documentation", "assests.documentation\assests.documentation.csproj", "{3F7974C0-9FC7-4001-A997-FDCDEDBD261E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickStreetArt.Web", "LimerickStreetArt.Web\LimerickStreetArt.Web.csproj", "{C81DA2E2-3647-453F-A667-5CF3615D10E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimerickStreetArt.Web", "LimerickStreetArt.Web\LimerickStreetArt.Web.csproj", "{C81DA2E2-3647-453F-A667-5CF3615D10E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5A7C84AC-44C4-4DC0-B9CA-5B6C239918FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{74B42C7C-08DD-4421-A342-D865C890A186} = {5A7C84AC-44C4-4DC0-B9CA-5B6C239918FA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C5E935CA-0179-484C-B4B4-2ECF7CC48204}

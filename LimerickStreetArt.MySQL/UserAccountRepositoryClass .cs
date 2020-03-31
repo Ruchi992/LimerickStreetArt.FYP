@@ -16,7 +16,7 @@
             throw new System.NotImplementedException();
         }
 
-        public UserAccount Get(int id)
+        public UserAccount GetById(int id)
         {
             throw new System.NotImplementedException();
         }

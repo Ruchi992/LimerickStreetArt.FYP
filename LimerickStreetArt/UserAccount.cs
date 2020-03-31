@@ -21,11 +21,17 @@
 		{
 			get;
 			set;
-		}
-		public bool Validated
+		}		
+		public DateTime DateOfBirth
 		{
 			get;
 			set;
 		}
+		public int AccessLevel
+		{
+			get;
+			set;
+		}
+
 	}
 }
