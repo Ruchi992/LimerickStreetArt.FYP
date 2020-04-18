@@ -1,58 +1,64 @@
--- MySQL Workbench Forward Engineering
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
--- -----------------------------------------------------
--- Schema LimerickStreetArt
--- -----------------------------------------------------
+DROP DATABASE IF EXISTS `limerickstreetart`;
+CREATE DATABASE IF NOT EXISTS `limerickstreetart` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `limerickstreetart`;
 
--- -----------------------------------------------------
--- Schema LimerickStreetArt
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `LimerickStreetArt` DEFAULT CHARACTER SET utf8 ;
-USE `LimerickStreetArt` ;
+CREATE TABLE `streetart` (
+  `Id` int(11) NOT NULL,
+  `GpsLatitude` float(10,8) NOT NULL,
+  `GpsLongitude` float(10,8) NOT NULL,
+  `Title` varchar(45) NOT NULL,
+  `Street` varchar(45) DEFAULT NULL,
+  `Timestamp` datetime NOT NULL,
+  `Image` mediumblob NOT NULL,
+  `UserAccountId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- -----------------------------------------------------
--- Table `LimerickStreetArt`.`UserAccount`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `LimerickStreetArt`.`UserAccount` (
-  `Id` INT NOT NULL AUTO_INCREMENT,
-  `Username` VARCHAR(45) NOT NULL,
-  `Email` VARCHAR(45) NOT NULL,
-  `Password` VARCHAR(45) NOT NULL,
-  `Active` TINYINT NOT NULL,
-  `DateOfBirth` DATE NOT NULL,
-  `AccessLevel` INT NOT NULL,
-  PRIMARY KEY (`Id`),
-  UNIQUE INDEX `Username_UNIQUE` (`Username` ASC) VISIBLE,
-  UNIQUE INDEX `Email_UNIQUE` (`Email` ASC) VISIBLE)
-ENGINE = InnoDB;
+CREATE TABLE `useraccount` (
+  `Id` int(11) NOT NULL,
+  `Username` varchar(45) NOT NULL,
+  `Email` varchar(45) NOT NULL,
+  `Password` varchar(45) NOT NULL,
+  `Active` tinyint(4) NOT NULL,
+  `DateOfBirth` date NOT NULL,
+  `AccessLevel` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
--- -----------------------------------------------------
--- Table `LimerickStreetArt`.`StreetArt`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `LimerickStreetArt`.`StreetArt` (
-  `Id` INT NOT NULL AUTO_INCREMENT,
-  `GpsLatitude` FLOAT(10,8) NOT NULL,
-  `GpsLongitude` FLOAT(10,8) NOT NULL,
-  `Title` VARCHAR(45) NOT NULL,
-  `Street` VARCHAR(45) NULL,
-  `Timestamp` DATETIME NOT NULL,
-  `Image` MEDIUMBLOB NOT NULL,
-  `UserAccountId` INT NOT NULL,
-  PRIMARY KEY (`Id`),
-  INDEX `fk_StreetArt_UserAccount_idx` (`UserAccountId` ASC) VISIBLE,
-  CONSTRAINT `fk_StreetArt_UserAccount`
-    FOREIGN KEY (`UserAccountId`)
-    REFERENCES `LimerickStreetArt`.`UserAccount` (`Id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+INSERT INTO `useraccount` (`Id`, `Username`, `Email`, `Password`, `Active`, `DateOfBirth`, `AccessLevel`) VALUES
+(1, 'Admin', 'Admin@streetart.ie', 'letmein', 1, '2000-01-01', 1),
+(2, 'Test', 'test@test.ie', 'letmein', 1, '2000-01-01', 2);
 
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+ALTER TABLE `streetart`
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `fk_StreetArt_UserAccount_idx` (`UserAccountId`);
+
+ALTER TABLE `useraccount`
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `Username_UNIQUE` (`Username`),
+  ADD UNIQUE KEY `Email_UNIQUE` (`Email`);
+
+
+ALTER TABLE `streetart`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `useraccount`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+
+ALTER TABLE `streetart`
+  ADD CONSTRAINT `fk_StreetArt_UserAccount` FOREIGN KEY (`UserAccountId`) REFERENCES `useraccount` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
