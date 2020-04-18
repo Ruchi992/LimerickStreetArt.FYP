@@ -4,6 +4,6 @@
 
     partial interface UserAccountRepository
     {
-        UserAccount Login(String username, String password);
+        UserAccount GetUserAccountByCredentials(String username, String password);
     }
 }

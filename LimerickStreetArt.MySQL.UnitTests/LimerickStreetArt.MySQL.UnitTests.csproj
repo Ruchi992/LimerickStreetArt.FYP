@@ -4,6 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <StartupObject>LimerickStreetArt.MySQL.UnitTests.Test</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

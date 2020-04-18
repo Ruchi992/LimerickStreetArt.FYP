@@ -26,7 +26,7 @@
             throw new System.NotImplementedException();
         }
 
-        public UserAccount Login(string username, string password)
+        public UserAccount GetUserAccountByCredentials(string username, string password)
         {
             throw new System.NotImplementedException();
         }
@@ -36,7 +36,7 @@
             throw new System.NotImplementedException();
         }
 
-        public List<UserAccount> SelectAll()
+        public List<UserAccount> GetUserAccounts()
         {
             throw new System.NotImplementedException();
         }
