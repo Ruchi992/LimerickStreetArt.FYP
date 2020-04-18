@@ -27,6 +27,7 @@
 				{
 					Connection = connection,
 					CommandText = commandText,
+					CommandType = CommandType.StoredProcedure,
 				};
 				{
 
@@ -56,6 +57,7 @@
 				{
 					Connection = connection,
 					CommandText = commandText,
+					CommandType = CommandType.StoredProcedure,
 				};
 				{
 					command.Parameters.AddWithValue("@Id", userAccount.Id);
@@ -75,10 +77,10 @@
 				{
 					Connection = connection,
 					CommandText = commandText,
+					CommandType = CommandType.StoredProcedure,
 				};
 				{
-					command.Parameters.Add(new MySqlParameter("@Id_", id));
-					command.Parameters.Add(new MySqlParameter("@id", id));
+					command.Parameters.Add(new MySqlParameter("Id_", id));
 
 					command.Prepare();
 					var dataTable = new DataTable("Table");
@@ -107,10 +109,11 @@
 				{
 					Connection = connection,
 					CommandText = commandText,
+					CommandType= CommandType.StoredProcedure,
 				};
 
-				command.Parameters.Add(new MySqlParameter("@username", username));
-				command.Parameters.Add(new MySqlParameter("@password", password));
+				command.Parameters.Add(new MySqlParameter("username", username));
+				command.Parameters.Add(new MySqlParameter("password", password));
 
 				command.Prepare();
 				var dataTable = new DataTable("Table");

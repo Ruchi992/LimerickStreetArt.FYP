@@ -23,9 +23,12 @@ namespace LimerickStreetArt.MySQL.UnitTests
 			Console.WriteLine(user1.Username);
 
 
-			int id = 2;
+			int id = 299;
 			Console.WriteLine($"Searching for user matching Id{id}");
 			var getByid = userAccountRepositoryClass.GetById(id);
+			if(getByid== null)
+				Console.WriteLine($"No user matching Id{id}");
+			else
 			Console.WriteLine(getByid.Username);
 
 
