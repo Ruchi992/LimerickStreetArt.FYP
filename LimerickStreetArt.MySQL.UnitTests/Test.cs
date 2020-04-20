@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LimerickStreetArt.MySQL.UnitTests
 {
-	class Test
+	internal class Test
 	{
 		public static void Main()
 		{
@@ -33,6 +33,7 @@ namespace LimerickStreetArt.MySQL.UnitTests
 
 
 			Console.WriteLine($"get all users");
+			var userAccounts = UserAccountRepositoryClass.
 
 			var userAccounts = userAccountRepositoryClass.GetUserAccounts();
 

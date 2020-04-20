@@ -1,42 +1,41 @@
-﻿using System;
-
-namespace LimerickStreetArt
+﻿namespace LimerickStreetArt
 {
+	using System;
 	public class StreetArt
 	{
 		public int Id { get; set; }
 
-		public float GpsLatitude
+		public static float GpsLatitude
 		{
 			get;
 			set;
 		}
-		public float GpsLongitude
+		public static float GpsLongitude
 		{
 			get;
 			set;
 		}
-		public String Title
+		public static String Title
 		{
 			get;
 			set;
 		}
-		public String Street
+		public  static String Street
 		{
 			get;
 			set;
 		}
-		public DateTime Timestamp
+		public static DateTime Timestamp
 		{
 			get;
 			set;
 		}
-		public String Image
+		public static String Image
 		{
 			get;
 			set;
 		}
-		public int UserAccountId
+		public static int UserAccountId
 		{
 			get;
 			set;

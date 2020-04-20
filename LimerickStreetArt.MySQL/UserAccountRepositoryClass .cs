@@ -95,8 +95,29 @@
 
 		public List<UserAccount> GetActiveUserAccounts()
 		{
-			throw new System.NotImplementedException();
+			using var connection = new MySqlConnection(Database.ConnectionString);
+			{
+				connection.Open();
+
+				var commandText = "GetActiveUserAccounts";
+				var command = new MySqlCommand
+				{
+					Connection = connection,
+					CommandText = commandText,
+					CommandType = CommandType.StoredProcedure,
+				};		
+
+				command.Prepare();
+				var dataTable = new DataTable("Table");
+				using var dataAdapter = new MySqlDataAdapter(command);
+				{
+					dataAdapter.Fill(dataTable);
+					return this.Transform(dataTable);
+				}
+
+			}
 		}
+	
 
 		public UserAccount GetUserAccountByCredentials(string username, string password)
 		{
@@ -156,8 +177,34 @@
 
 		public void Update(UserAccount userAccount)
 		{
-			throw new System.NotImplementedException();
+			using var connection = new MySqlConnection(Database.ConnectionString);
+			{
+				connection.Open();
+
+				var commandText = "UpdateUserAccount";
+				using var command = new MySqlCommand
+				{
+					Connection = connection,
+					CommandText = commandText,
+					CommandType = CommandType.StoredProcedure,
+				};
+
+				{
+
+					command.Parameters.AddWithValue("@AccessLevel", userAccount.AccessLevel);
+					command.Parameters.AddWithValue("@Active", userAccount.Active);
+					command.Parameters.AddWithValue("@DateOfBirth", userAccount.DateOfBirth);
+					command.Parameters.AddWithValue("@Email", userAccount.Email);
+					command.Parameters.AddWithValue("@Username", userAccount.Username);
+
+
+					command.Prepare();
+
+					command.ExecuteNonQuery();
+				}
+			}
 		}
+	
 
 		private List<UserAccount> Transform(DataTable dataTable)
 		{
@@ -183,5 +230,7 @@
 				Username = (String)dataRow["Username"],
 			};
 		}
+
+		
 	}
 }
