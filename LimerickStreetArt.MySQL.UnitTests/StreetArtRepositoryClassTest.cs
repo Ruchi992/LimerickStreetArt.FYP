@@ -14,7 +14,7 @@ namespace LimerickStreetArt.MySQL.UnitTests
 		{
 			var databaseClass = new DatabaseClass
 			{
-				ConnectionString = "Server=localhost;Database=limerickstreetart;Uid=root;Password=;"
+				ConnectionString = AppSettings.ConnectionString
 			};
 
 			sut = new StreetArtRepositoryClass(databaseClass);
@@ -59,10 +59,10 @@ namespace LimerickStreetArt.MySQL.UnitTests
 		[TestMethod]
 		public void TestGetById()
 		{
-			int id = 2;
+			int id = 3;
 			var streetArt = sut.GetById(id);
 
-			Assert.AreEqual(streetArt.Id, id);
+			Assert.IsNotNull(streetArt);
 		}
 		[TestMethod]
 		public void TestGetByNonexistingId()

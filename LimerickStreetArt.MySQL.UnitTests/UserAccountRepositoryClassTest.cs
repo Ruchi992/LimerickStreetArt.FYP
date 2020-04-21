@@ -14,7 +14,7 @@ namespace LimerickStreetArt.MySQL.UnitTests
 		{
 			var databaseClass = new DatabaseClass
 			{
-				ConnectionString = "Server=localhost;Database=limerickstreetart;Uid=root;Password=;"
+				ConnectionString = AppSettings.ConnectionString
 			};
 
 			sut = new UserAccountRepositoryClass(databaseClass);
@@ -61,7 +61,7 @@ namespace LimerickStreetArt.MySQL.UnitTests
 				Username = "TestCreateUser1",
 			};
 			sut.Create(newUserAccount);
-			//TODO :RD Id not updating
+
 			var user = sut.GetById(newUserAccount.Id);
 
 			Assert.AreEqual(user.Username, newUserAccount.Username);

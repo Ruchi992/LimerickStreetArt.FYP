@@ -170,7 +170,7 @@
 				Title = (string)dataRow["Title"],
 				Street= (string)dataRow["Street"],
 				Timestamp = (DateTime)dataRow["Timestamp"],
-				Image = (String)dataRow["Image"],
+				//Image = (String)dataRow["Image"],
 				UserAccountId = (int)dataRow["UserAccountId"],
 				
 			};
