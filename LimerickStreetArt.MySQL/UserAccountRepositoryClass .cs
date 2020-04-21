@@ -45,6 +45,10 @@
 					command.ExecuteNonQuery();
 
 					//TODO :RD Id not updating : always returns 0, should return next number in column say 8
+					//TODO: out and fix why command.LastInsertedI isn't working
+					//TODO: out paramaters in stored procedures
+					//TODO: return select statementt from the stored procedure
+					//TODO: call a asepeerate stroed procedure to get LastInsertedId;
 					long id = command.LastInsertedId;
 					userAccount.Id = (int) id;
 				}

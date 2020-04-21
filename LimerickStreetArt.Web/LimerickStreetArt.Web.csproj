@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="React.AspNet" Version="5.2.4" />
+  </ItemGroup>
+
 
 
 </Project>
