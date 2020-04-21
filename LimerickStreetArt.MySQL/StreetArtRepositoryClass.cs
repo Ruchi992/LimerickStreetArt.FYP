@@ -98,12 +98,11 @@
 		}
 		public List<StreetArt> GetStreetArtList()
 		{
-			//TODO: RD : Fix biys
 			using var connection = new MySqlConnection(Database.ConnectionString);
 			{
 				connection.Open();
 
-				var commandText = "GetActiveUserAccounts";
+				var commandText = "GetStreetArtList";
 				var command = new MySqlCommand
 				{
 					Connection = connection,
@@ -167,7 +166,6 @@
 			return new StreetArt
 			{
 				GpsLatitude = (float)dataRow["GpsLatitude"],
-				//TODO :RD: Mappings to database columns
 				GpsLongitude = (float)dataRow["GpsLongitude"] ,
 				Title = (string)dataRow["Title"],
 				Street= (string)dataRow["Street"],

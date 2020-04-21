@@ -61,7 +61,7 @@ namespace LimerickStreetArt.MySQL.UnitTests
 				Username = "TestCreateUser1",
 			};
 			sut.Create(newUserAccount);
-			//TODO :RD Idd not updating
+			//TODO :RD Id not updating
 			var user = sut.GetById(newUserAccount.Id);
 
 			Assert.AreEqual(user.Username, newUserAccount.Username);
