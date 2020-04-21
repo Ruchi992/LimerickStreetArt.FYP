@@ -7,7 +7,7 @@ namespace LimerickStreetArt.Repository
 	public partial interface StreetArtRepository
 	{
         StreetArt GetById(int StreetArtId);
-        List<StreetArt> SelectAll();
+        List<StreetArt> GetStreetArtList();
         
         void Delete(StreetArt streetart);
         void Update(StreetArt streetart);

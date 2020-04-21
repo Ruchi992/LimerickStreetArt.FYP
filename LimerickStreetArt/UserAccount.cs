@@ -17,6 +17,7 @@
 			get;
 			set;
 		}
+		public String Password { get; set; }
 		public bool Active
 		{
 			get;

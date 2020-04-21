@@ -1,17 +1,12 @@
 ﻿namespace LimerickStreetArt.MySQL
 {
-
-    using System.Collections.Generic;
-	using System;
 	using System.Collections.Generic;
+	using System;
 	using System.Data;
 	using System.Linq;
 	using LimerickStreetArt;
-using LimerickStreetArt.Repository;
-using MySql.Data.MySqlClient;
-
-
-
+	using LimerickStreetArt.Repository;
+	using MySql.Data.MySqlClient;
 	public class StreetArtRepositoryClass : StreetArtRepository
 	{
 		public DatabaseClass Database { get; private set; }
@@ -36,23 +31,19 @@ using MySql.Data.MySqlClient;
 					CommandType = CommandType.StoredProcedure,
 				};
 				{
-					command.Parameters.AddWithValue("@GpsLatitude", StreetArt.GpsLatitude);
-					command.Parameters.AddWithValue("@GpsLongitude", StreetArt.GpsLongitude);
-					command.Parameters.AddWithValue("@Title", StreetArt.Title);
-					command.Parameters.AddWithValue("@Street", StreetArt.Street);
-					command.Parameters.AddWithValue("@Timestamp", StreetArt.Timestamp);
-					command.Parameters.AddWithValue("@Image", StreetArt.Image);
-					command.Parameters.AddWithValue("@UserAccountId", StreetArt.UserAccountId);
-
+					command.Parameters.AddWithValue("@GpsLatitude", streetart.GpsLatitude);
+					command.Parameters.AddWithValue("@GpsLongitude", streetart.GpsLongitude);
+					command.Parameters.AddWithValue("@Title", streetart.Title);
+					command.Parameters.AddWithValue("@Street", streetart.Street);
+					command.Parameters.AddWithValue("@Timestamp", streetart.Timestamp);
+					command.Parameters.AddWithValue("@Image", streetart.Image);
+					command.Parameters.AddWithValue("@UserAccountId", streetart.UserAccountId);
 
 					command.Prepare();
-
 					command.ExecuteNonQuery();
 				}
 			}
 		}
-		
-
 		public void Delete(StreetArt streetart)
 		{
 			using var connection = new MySqlConnection(Database.ConnectionString);
@@ -74,9 +65,7 @@ using MySql.Data.MySqlClient;
 				}
 			}
 		}
-	
-
-		public StreetArt GetById(int StreetArtId)
+		public StreetArt GetById(int streetArtId)
 		{
 			using var connection = new MySqlConnection(Database.ConnectionString);
 			{
@@ -90,7 +79,7 @@ using MySql.Data.MySqlClient;
 					CommandType = CommandType.StoredProcedure,
 				};
 				{
-					command.Parameters.Add("@ID", id);
+					command.Parameters.Add(new MySqlParameter("@ID", streetArtId));
 
 					command.Prepare();
 					var dataTable = new DataTable("Table");
@@ -98,21 +87,93 @@ using MySql.Data.MySqlClient;
 					{
 						dataAdapter.Fill(dataTable);
 						command.ExecuteNonQuery();
+						return this.Transform(dataTable).FirstOrDefault();
 					}
 				}
 			}
 		}
-
-	}
-
-	public List<StreetArt> SelectAll()
+		public List<StreetArt> GetStreetArtList()
 		{
-			throw new NotImplementedException();
+			//TODO: RD : Fix biys
+			using var connection = new MySqlConnection(Database.ConnectionString);
+			{
+				connection.Open();
+
+				var commandText = "GetActiveUserAccounts";
+				var command = new MySqlCommand
+				{
+					Connection = connection,
+					CommandText = commandText,
+					CommandType = CommandType.StoredProcedure,
+				};
+
+				command.Prepare();
+				var dataTable = new DataTable("Table");
+				using var dataAdapter = new MySqlDataAdapter(command);
+				{
+					dataAdapter.Fill(dataTable);
+					return this.Transform(dataTable);
+				}
+
+			}
 		}
 
 		public void Update(StreetArt streetart)
 		{
-			throw new NotImplementedException();
+			using var connection = new MySqlConnection(Database.ConnectionString);
+			{
+				connection.Open();
+
+				var commandText = "UpdateStreetArt";
+				using var command = new MySqlCommand
+				{
+					Connection = connection,
+					CommandText = commandText,
+					CommandType = CommandType.StoredProcedure,
+				};
+
+				{
+
+					command.Parameters.AddWithValue("@GpsLatitude", streetart.GpsLatitude);
+					command.Parameters.AddWithValue("@GpsLongitude", streetart.GpsLongitude);
+					command.Parameters.AddWithValue("@Title", streetart.Title);
+					command.Parameters.AddWithValue("@Street", streetart.Street);
+					command.Parameters.AddWithValue("@Timestamp", streetart.Timestamp);
+					command.Parameters.AddWithValue("@Image", streetart.Image);
+					command.Parameters.AddWithValue("@UserAccountId", streetart.UserAccountId);
+
+					command.Prepare();
+					command.ExecuteNonQuery();
+				}
+			}
 		}
+		private List<StreetArt> Transform(DataTable dataTable)
+		{
+			var streetArtList = new List<StreetArt>();
+
+			foreach (DataRow dataRow in dataTable.Rows)
+			{
+				streetArtList.Add(this.Transform(dataRow));
+
+			}
+			return streetArtList;
+		}
+		private StreetArt Transform(DataRow dataRow)
+		{
+			return new StreetArt
+			{
+				GpsLatitude = (float)dataRow["GpsLatitude"],
+				//TODO :RD: Mappings to database columns
+				GpsLongitude = (float)dataRow["GpsLongitude"] ,
+				Title = (string)dataRow["Title"],
+				Street= (string)dataRow["Street"],
+				Timestamp = (DateTime)dataRow["Timestamp"],
+				Image = (String)dataRow["Image"],
+				UserAccountId = (int)dataRow["UserAccountId"],
+				
+			};
+		}
+
+
 	}
 }

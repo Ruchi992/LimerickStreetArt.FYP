@@ -2,7 +2,7 @@
 {
     using System;
 
-	public partial interface UserAccountRepository
+	partial interface UserAccountRepository
     {
         UserAccount GetUserAccountByCredentials(String username, String password);
     }

@@ -35,12 +35,18 @@
 					command.Parameters.AddWithValue("@Active", userAccount.Active);
 					command.Parameters.AddWithValue("@DateOfBirth", userAccount.DateOfBirth);
 					command.Parameters.AddWithValue("@Email", userAccount.Email);
+					command.Parameters.AddWithValue("@Password", userAccount.Password);
+
 					command.Parameters.AddWithValue("@Username", userAccount.Username);
 
 
 					command.Prepare();
 
 					command.ExecuteNonQuery();
+
+					//TODO :RD Id not updating
+					long id = command.LastInsertedId;
+					userAccount.Id = (int) id;
 				}
 			}
 		}
@@ -147,11 +153,6 @@
 			}
 		}
 
-		public List<UserAccount> Query(object query)
-		{
-			throw new System.NotImplementedException();
-		}
-
 		public List<UserAccount> GetUserAccounts()
 		{
 			using var connection = new MySqlConnection(Database.ConnectionString);
@@ -227,6 +228,8 @@
 				DateOfBirth = (DateTime)dataRow["DateOfBirth"],
 				Email = (String)dataRow["Email"],
 				Id = (int)dataRow["Id"],
+				Password = (String)dataRow["Password"],
+
 				Username = (String)dataRow["Username"],
 			};
 		}

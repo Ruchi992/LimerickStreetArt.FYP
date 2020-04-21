@@ -5,41 +5,40 @@
 	{
 		public int Id { get; set; }
 
-		public static float GpsLatitude
+		public float GpsLatitude
 		{
 			get;
 			set;
 		}
-		public static float GpsLongitude
+		public float GpsLongitude
 		{
 			get;
 			set;
 		}
-		public static String Title
+		public String Title
 		{
 			get;
 			set;
 		}
-		public  static String Street
+		public String Street
 		{
 			get;
 			set;
 		}
-		public static DateTime Timestamp
+		public DateTime Timestamp
 		{
 			get;
 			set;
 		}
-		public static String Image
+		public String Image
 		{
 			get;
 			set;
 		}
-		public static int UserAccountId
+		public int UserAccountId
 		{
 			get;
 			set;
-		}
+		}		
 	}
-
 }
