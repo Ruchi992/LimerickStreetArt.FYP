@@ -41,6 +41,10 @@
 
 					command.Prepare();
 					command.ExecuteNonQuery();
+
+					//TODO :RD Id not updating
+					long id = command.LastInsertedId;
+					streetart.Id = (int)id;
 				}
 			}
 		}
@@ -71,7 +75,7 @@
 			{
 				connection.Open();
 
-				var commandText = "GetById";
+				var commandText = "GetStreetArtById";
 				using var command = new MySqlCommand
 				{
 					Connection = connection,
@@ -79,7 +83,7 @@
 					CommandType = CommandType.StoredProcedure,
 				};
 				{
-					command.Parameters.Add(new MySqlParameter("@ID", streetArtId));
+					command.Parameters.Add(new MySqlParameter("@_id", streetArtId));
 
 					command.Prepare();
 					var dataTable = new DataTable("Table");

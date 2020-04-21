@@ -27,31 +27,32 @@ namespace LimerickStreetArt.MySQL.UnitTests
 				ConnectionString = "Server=localhost;Database=limerickstreetart;Uid=root;Password=;"
 			};
 
-			var userAccountRepositoryClass = new UserAccountRepositoryClass(databaseClass);
-			Assert.IsNotNull(userAccountRepositoryClass);
+			var streetartRepositoryClass = new StreetArtRepositoryClass(databaseClass);
+			Assert.IsNotNull(streetartRepositoryClass);
 		}
 		[TestMethod]
 		public void TestCreate()
 		{
-			
-			//TODO : RD: make for street art
 			var newStreetArt = new StreetArt
 			{
+
 				GpsLatitude = 2308769,
 				GpsLongitude = 2300000,
-				Title = "Jim version",				
-			   Image = "Image",
+				Title = "Jim version",
+				Timestamp = DateTime.Now,
+				Image = "Image",
 				UserAccountId = 2,
 			};
 			sut.Create(newStreetArt);
 
 			var streetArt = sut.GetById(newStreetArt.Id);
+
 			Assert.AreEqual(streetArt.GpsLatitude, newStreetArt.GpsLatitude);
 			Assert.AreEqual(streetArt.GpsLongitude, newStreetArt.GpsLongitude);
 			Assert.AreEqual(streetArt.Title, newStreetArt.Title);
 			Assert.AreEqual(streetArt.Image, newStreetArt.Image);
 			Assert.AreEqual(streetArt.UserAccountId, streetArt.UserAccountId);
-			
+
 
 			sut.Delete(newStreetArt);
 		}
