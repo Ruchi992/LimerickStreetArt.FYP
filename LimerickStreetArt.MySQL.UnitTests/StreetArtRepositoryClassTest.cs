@@ -40,6 +40,7 @@ namespace LimerickStreetArt.MySQL.UnitTests
 				GpsLongitude = 2300000,
 				Title = "Jim version",
 				Timestamp = DateTime.Now,
+				Street="Evergreen Terrrace",
 				Image = "Image",
 				UserAccountId = 2,
 			};
