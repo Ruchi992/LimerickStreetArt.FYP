@@ -22,6 +22,7 @@
 			{
 				connection.Open();
 				var ID = Database.LastInsertId();
+
 				var commandText = "CreateUserAccount";
 				using var command = new MySqlCommand
 				{
