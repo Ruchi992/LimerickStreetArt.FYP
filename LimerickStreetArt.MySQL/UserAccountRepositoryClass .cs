@@ -21,7 +21,7 @@
 			using var connection = new MySqlConnection(Database.ConnectionString);
 			{
 				connection.Open();
-
+				var ID = Database.LastInsertId();
 				var commandText = "CreateUserAccount";
 				using var command = new MySqlCommand
 				{
@@ -38,10 +38,10 @@
 					command.Parameters.AddWithValue("@Password", userAccount.Password);
 
 					command.Parameters.AddWithValue("@Username", userAccount.Username);
+					command.Parameters.AddWithValue("@id", userAccount.Id);
 
 
 					command.Prepare();
-
 					command.ExecuteNonQuery();
 
 					//TODO :RD Id not updating : always returns 0, should return next number in column say 8
@@ -50,47 +50,102 @@
 					//TODO: return select statementt from the stored procedure
 					//TODO: call a asepeerate stroed procedure to get LastInsertedId;
 					long id = command.LastInsertedId;
-					userAccount.Id = (int) id;
+					userAccount.Id = (int)id;
 				}
 			}
 		}
 
-		public void Delete(UserAccount userAccount)
-		{
-			using var connection = new MySqlConnection(Database.ConnectionString);
+
+			public void Delete(UserAccount userAccount)
 			{
-
-				connection.Open();
-
-				var commandText = "DeleteUserAccount";
-				using var command = new MySqlCommand
+				using var connection = new MySqlConnection(Database.ConnectionString);
 				{
-					Connection = connection,
-					CommandText = commandText,
-					CommandType = CommandType.StoredProcedure,
-				};
+
+					connection.Open();
+
+					var commandText = "DeleteUserAccount";
+					using var command = new MySqlCommand
+					{
+						Connection = connection,
+						CommandText = commandText,
+						CommandType = CommandType.StoredProcedure,
+					};
+					{
+						command.Parameters.AddWithValue("@Id", userAccount.Id);
+						command.Prepare();
+						command.ExecuteNonQuery();
+					}
+				}
+			}
+			public UserAccount GetById(int id)
+			{
+				using var connection = new MySqlConnection(Database.ConnectionString);
 				{
-					command.Parameters.AddWithValue("@Id", userAccount.Id);
+					connection.Open();
+
+					var commandText = "GetUserAccountById";
+					using var command = new MySqlCommand
+					{
+						Connection = connection,
+						CommandText = commandText,
+						CommandType = CommandType.StoredProcedure,
+					};
+					{
+						command.Parameters.Add(new MySqlParameter("Id_", id));
+
+						command.Prepare();
+						var dataTable = new DataTable("Table");
+						using var dataAdapter = new MySqlDataAdapter(command);
+						{
+							dataAdapter.Fill(dataTable);
+							return this.Transform(dataTable).FirstOrDefault();
+						}
+					}
+				}
+			}
+
+			public List<UserAccount> GetActiveUserAccounts()
+			{
+				using var connection = new MySqlConnection(Database.ConnectionString);
+				{
+					connection.Open();
+
+					var commandText = "GetActiveUserAccounts";
+					var command = new MySqlCommand
+					{
+						Connection = connection,
+						CommandText = commandText,
+						CommandType = CommandType.StoredProcedure,
+					};
+
 					command.Prepare();
-					command.ExecuteNonQuery();
+					var dataTable = new DataTable("Table");
+					using var dataAdapter = new MySqlDataAdapter(command);
+					{
+						dataAdapter.Fill(dataTable);
+						return this.Transform(dataTable);
+					}
+
 				}
 			}
-		}
-		public UserAccount GetById(int id)
-		{
-			using var connection = new MySqlConnection(Database.ConnectionString);
-			{
-				connection.Open();
 
-				var commandText = "GetUserAccountById";
-				using var command = new MySqlCommand
+
+			public UserAccount GetUserAccountByCredentials(string username, string password)
+			{
+				using var connection = new MySqlConnection(Database.ConnectionString);
 				{
-					Connection = connection,
-					CommandText = commandText,
-					CommandType = CommandType.StoredProcedure,
-				};
-				{
-					command.Parameters.Add(new MySqlParameter("Id_", id));
+					connection.Open();
+
+					var commandText = "GetUserAccountByCredentials";
+					var command = new MySqlCommand
+					{
+						Connection = connection,
+						CommandText = commandText,
+						CommandType = CommandType.StoredProcedure,
+					};
+
+					command.Parameters.Add(new MySqlParameter("username", username));
+					command.Parameters.Add(new MySqlParameter("password", password));
 
 					command.Prepare();
 					var dataTable = new DataTable("Table");
@@ -99,117 +154,63 @@
 						dataAdapter.Fill(dataTable);
 						return this.Transform(dataTable).FirstOrDefault();
 					}
+
 				}
 			}
-		}
 
-		public List<UserAccount> GetActiveUserAccounts()
-		{
-			using var connection = new MySqlConnection(Database.ConnectionString);
+			public List<UserAccount> GetUserAccounts()
 			{
-				connection.Open();
-
-				var commandText = "GetActiveUserAccounts";
-				var command = new MySqlCommand
+				using var connection = new MySqlConnection(Database.ConnectionString);
 				{
-					Connection = connection,
-					CommandText = commandText,
-					CommandType = CommandType.StoredProcedure,
-				};		
+					connection.Open();
 
-				command.Prepare();
-				var dataTable = new DataTable("Table");
-				using var dataAdapter = new MySqlDataAdapter(command);
-				{
-					dataAdapter.Fill(dataTable);
-					return this.Transform(dataTable);
-				}
-
-			}
-		}
-	
-
-		public UserAccount GetUserAccountByCredentials(string username, string password)
-		{
-			using var connection = new MySqlConnection(Database.ConnectionString);
-			{
-				connection.Open();
-
-				var commandText = "GetUserAccountByCredentials";
-				var command = new MySqlCommand
-				{
-					Connection = connection,
-					CommandText = commandText,
-					CommandType= CommandType.StoredProcedure,
-				};
-
-				command.Parameters.Add(new MySqlParameter("username", username));
-				command.Parameters.Add(new MySqlParameter("password", password));
-
-				command.Prepare();
-				var dataTable = new DataTable("Table");
-				using var dataAdapter = new MySqlDataAdapter(command);
-				{
-					dataAdapter.Fill(dataTable);
-					return this.Transform(dataTable).FirstOrDefault();
-				}
-
-			}
-		}
-
-		public List<UserAccount> GetUserAccounts()
-		{
-			using var connection = new MySqlConnection(Database.ConnectionString);
-			{
-				connection.Open();
-
-				var commandText = "GetUserAccounts";
-				using var command = new MySqlCommand
-				{
-					Connection = connection,
-					CommandText = commandText,
-				};
-				{
-					var dataTable = new DataTable("Table");
-					using var dataAdapter = new MySqlDataAdapter(command);
+					var commandText = "GetUserAccounts";
+					using var command = new MySqlCommand
 					{
-						dataAdapter.Fill(dataTable);
-						return this.Transform(dataTable);
+						Connection = connection,
+						CommandText = commandText,
+					};
+					{
+						var dataTable = new DataTable("Table");
+						using var dataAdapter = new MySqlDataAdapter(command);
+						{
+							dataAdapter.Fill(dataTable);
+							return this.Transform(dataTable);
+						}
 					}
 				}
 			}
-		}
 
-		public void Update(UserAccount userAccount)
-		{
-			using var connection = new MySqlConnection(Database.ConnectionString);
+			public void Update(UserAccount userAccount)
 			{
-				connection.Open();
-
-				var commandText = "UpdateUserAccount";
-				using var command = new MySqlCommand
+				using var connection = new MySqlConnection(Database.ConnectionString);
 				{
-					Connection = connection,
-					CommandText = commandText,
-					CommandType = CommandType.StoredProcedure,
-				};
+					connection.Open();
 
-				{
+					var commandText = "UpdateUserAccount";
+					using var command = new MySqlCommand
+					{
+						Connection = connection,
+						CommandText = commandText,
+						CommandType = CommandType.StoredProcedure,
+					};
 
-					command.Parameters.AddWithValue("@AccessLevel", userAccount.AccessLevel);
-					command.Parameters.AddWithValue("@Active", userAccount.Active);
-					command.Parameters.AddWithValue("@DateOfBirth", userAccount.DateOfBirth);
-					command.Parameters.AddWithValue("@Email", userAccount.Email);
-					command.Parameters.AddWithValue("@Username", userAccount.Username);
+					{
+
+						command.Parameters.AddWithValue("@AccessLevel", userAccount.AccessLevel);
+						command.Parameters.AddWithValue("@Active", userAccount.Active);
+						command.Parameters.AddWithValue("@DateOfBirth", userAccount.DateOfBirth);
+						command.Parameters.AddWithValue("@Email", userAccount.Email);
+						command.Parameters.AddWithValue("@Username", userAccount.Username);
 
 
-					command.Prepare();
+						command.Prepare();
 
-					command.ExecuteNonQuery();
+						command.ExecuteNonQuery();
+					}
 				}
 			}
-		}
-	
+		
 
 		private List<UserAccount> Transform(DataTable dataTable)
 		{
