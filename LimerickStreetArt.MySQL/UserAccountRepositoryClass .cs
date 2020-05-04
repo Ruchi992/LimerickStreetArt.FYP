@@ -21,7 +21,7 @@
 			using var connection = new MySqlConnection(Database.ConnectionString);
 			{
 				connection.Open();
-				var ID = Database.LastInsertId();
+				//var ID = Database.LastInsertId();
 
 				var commandText = "CreateUserAccount";
 				using var command = new MySqlCommand
