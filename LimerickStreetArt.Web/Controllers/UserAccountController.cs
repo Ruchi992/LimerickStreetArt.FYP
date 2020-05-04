@@ -25,7 +25,8 @@
 		// GET: UserAccount
 		public ActionResult Index()
 		{
-			return View();
+			List<UserAccount> userAccounts = userAccountRepository.GetUserAccounts();
+			return View(userAccounts);
 		}
 
 		// GET: UserAccount/Details/5
