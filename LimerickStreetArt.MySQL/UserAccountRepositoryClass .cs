@@ -57,96 +57,42 @@
 		}
 
 
-			public void Delete(UserAccount userAccount)
+		public void Delete(UserAccount userAccount)
+		{
+			using var connection = new MySqlConnection(Database.ConnectionString);
 			{
-				using var connection = new MySqlConnection(Database.ConnectionString);
+
+				connection.Open();
+
+				var commandText = "DeleteUserAccount";
+				using var command = new MySqlCommand
 				{
-
-					connection.Open();
-
-					var commandText = "DeleteUserAccount";
-					using var command = new MySqlCommand
-					{
-						Connection = connection,
-						CommandText = commandText,
-						CommandType = CommandType.StoredProcedure,
-					};
-					{
-						command.Parameters.AddWithValue("@Id", userAccount.Id);
-						command.Prepare();
-						command.ExecuteNonQuery();
-					}
-				}
-			}
-			public UserAccount GetById(int id)
-			{
-				using var connection = new MySqlConnection(Database.ConnectionString);
+					Connection = connection,
+					CommandText = commandText,
+					CommandType = CommandType.StoredProcedure,
+				};
 				{
-					connection.Open();
-
-					var commandText = "GetUserAccountById";
-					using var command = new MySqlCommand
-					{
-						Connection = connection,
-						CommandText = commandText,
-						CommandType = CommandType.StoredProcedure,
-					};
-					{
-						command.Parameters.Add(new MySqlParameter("Id_", id));
-
-						command.Prepare();
-						var dataTable = new DataTable("Table");
-						using var dataAdapter = new MySqlDataAdapter(command);
-						{
-							dataAdapter.Fill(dataTable);
-							return this.Transform(dataTable).FirstOrDefault();
-						}
-					}
-				}
-			}
-
-			public List<UserAccount> GetActiveUserAccounts()
-			{
-				using var connection = new MySqlConnection(Database.ConnectionString);
-				{
-					connection.Open();
-
-					var commandText = "GetActiveUserAccounts";
-					var command = new MySqlCommand
-					{
-						Connection = connection,
-						CommandText = commandText,
-						CommandType = CommandType.StoredProcedure,
-					};
-
+					command.Parameters.AddWithValue("@Id", userAccount.Id);
 					command.Prepare();
-					var dataTable = new DataTable("Table");
-					using var dataAdapter = new MySqlDataAdapter(command);
-					{
-						dataAdapter.Fill(dataTable);
-						return this.Transform(dataTable);
-					}
-
+					command.ExecuteNonQuery();
 				}
 			}
-
-
-			public UserAccount GetUserAccountByCredentials(string username, string password)
+		}
+		public UserAccount GetById(int id)
+		{
+			using var connection = new MySqlConnection(Database.ConnectionString);
 			{
-				using var connection = new MySqlConnection(Database.ConnectionString);
+				connection.Open();
+
+				var commandText = "GetUserAccountById";
+				using var command = new MySqlCommand
 				{
-					connection.Open();
-
-					var commandText = "GetUserAccountByCredentials";
-					var command = new MySqlCommand
-					{
-						Connection = connection,
-						CommandText = commandText,
-						CommandType = CommandType.StoredProcedure,
-					};
-
-					command.Parameters.Add(new MySqlParameter("username", username));
-					command.Parameters.Add(new MySqlParameter("password", password));
+					Connection = connection,
+					CommandText = commandText,
+					CommandType = CommandType.StoredProcedure,
+				};
+				{
+					command.Parameters.Add(new MySqlParameter("Id_", id));
 
 					command.Prepare();
 					var dataTable = new DataTable("Table");
@@ -155,63 +101,119 @@
 						dataAdapter.Fill(dataTable);
 						return this.Transform(dataTable).FirstOrDefault();
 					}
-
 				}
 			}
+		}
 
-			public List<UserAccount> GetUserAccounts()
+		public List<UserAccount> GetActiveUserAccounts()
+		{
+			using var connection = new MySqlConnection(Database.ConnectionString);
 			{
-				using var connection = new MySqlConnection(Database.ConnectionString);
-				{
-					connection.Open();
+				connection.Open();
 
-					var commandText = "GetUserAccounts";
-					using var command = new MySqlCommand
+				var commandText = "GetActiveUserAccounts";
+				var command = new MySqlCommand
+				{
+					Connection = connection,
+					CommandText = commandText,
+					CommandType = CommandType.StoredProcedure,
+				};
+
+				command.Prepare();
+				var dataTable = new DataTable("Table");
+				using var dataAdapter = new MySqlDataAdapter(command);
+				{
+					dataAdapter.Fill(dataTable);
+					return this.Transform(dataTable);
+				}
+
+			}
+		}
+
+
+		public UserAccount GetUserAccountByCredentials(string username, string password)
+		{
+			using var connection = new MySqlConnection(Database.ConnectionString);
+			{
+				connection.Open();
+
+				var commandText = "GetUserAccountByCredentials";
+				var command = new MySqlCommand
+				{
+					Connection = connection,
+					CommandText = commandText,
+					CommandType = CommandType.StoredProcedure,
+				};
+
+				command.Parameters.Add(new MySqlParameter("username", username));
+				command.Parameters.Add(new MySqlParameter("password", password));
+
+				command.Prepare();
+				var dataTable = new DataTable("Table");
+				using var dataAdapter = new MySqlDataAdapter(command);
+				{
+					dataAdapter.Fill(dataTable);
+					return this.Transform(dataTable).FirstOrDefault();
+				}
+
+			}
+		}
+
+		public List<UserAccount> GetUserAccounts()
+		{
+			using var connection = new MySqlConnection(Database.ConnectionString);
+			{
+				connection.Open();
+
+				var commandText = "GetUserAccounts";
+				using var command = new MySqlCommand
+				{
+					Connection = connection,
+					CommandText = commandText,
+				};
+				{
+					var dataTable = new DataTable("Table");
+					using var dataAdapter = new MySqlDataAdapter(command);
 					{
-						Connection = connection,
-						CommandText = commandText,
-					};
-					{
-						var dataTable = new DataTable("Table");
-						using var dataAdapter = new MySqlDataAdapter(command);
-						{
-							dataAdapter.Fill(dataTable);
-							return this.Transform(dataTable);
-						}
+						dataAdapter.Fill(dataTable);
+						return this.Transform(dataTable);
 					}
 				}
 			}
+		}
 
-			public void Update(UserAccount userAccount)
+		public void Update(UserAccount userAccount)
+		{
+			using var connection = new MySqlConnection(Database.ConnectionString);
 			{
-				using var connection = new MySqlConnection(Database.ConnectionString);
+				connection.Open();
+
+				var commandText = "UpdateUserAccount";
+				using var command = new MySqlCommand
 				{
-					connection.Open();
+					Connection = connection,
+					CommandText = commandText,
+					CommandType = CommandType.StoredProcedure,
+				};
 
-					var commandText = "UpdateUserAccount";
-					using var command = new MySqlCommand
-					{
-						Connection = connection,
-						CommandText = commandText,
-						CommandType = CommandType.StoredProcedure,
-					};
+				{
 
-					{
-
-						command.Parameters.AddWithValue("@AccessLevel", userAccount.AccessLevel);
-						command.Parameters.AddWithValue("@Active", userAccount.Active);
-						command.Parameters.AddWithValue("@DateOfBirth", userAccount.DateOfBirth);
-						command.Parameters.AddWithValue("@Email", userAccount.Email);
-						command.Parameters.AddWithValue("@Username", userAccount.Username);
+					command.Parameters.AddWithValue("@AccessLevel", userAccount.AccessLevel);
+					command.Parameters.AddWithValue("@Active", userAccount.Active);
+					command.Parameters.AddWithValue("@DateOfBirth", userAccount.DateOfBirth);
+					command.Parameters.AddWithValue("@Email", userAccount.Email);
+					command.Parameters.AddWithValue("@Username", userAccount.Username);
+					command.Parameters.AddWithValue("@Password", userAccount.Password);
+					command.Parameters.AddWithValue("@Id_", userAccount.Id);
 
 
-						command.Prepare();
+					command.Prepare();
 
-						command.ExecuteNonQuery();
-					}
+					command.ExecuteNonQuery();
 				}
 			}
-		
+		}
+
 
 		private List<UserAccount> Transform(DataTable dataTable)
 		{
@@ -240,6 +242,6 @@
 			};
 		}
 
-		
+
 	}
 }

@@ -62,7 +62,8 @@
 		// GET: UserAccount/Edit/5
 		public ActionResult Edit(int id)
 		{
-			return View();
+			UserAccount userAccount = userAccountRepository.GetById(id);
+			return View(userAccount);
 		}
 
 		// POST: UserAccount/Edit/5
@@ -70,16 +71,17 @@
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit(int id, IFormCollection collection)
 		{
-			try
-			{
+
+				UserAccount userAccount = userAccountRepository.GetById(id);
+
+				userAccount.Password = collection["Password"];
+				userAccount.Username = collection["Username"];
 				// TODO: Add update logic here
 
+				userAccountRepository.Update(userAccount);
+
 				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				return View();
-			}
+
 		}
 
 		// GET: UserAccount/Delete/5

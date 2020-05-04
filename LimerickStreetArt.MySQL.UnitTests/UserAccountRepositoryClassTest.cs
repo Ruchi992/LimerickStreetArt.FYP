@@ -121,5 +121,24 @@ namespace LimerickStreetArt.MySQL.UnitTests
 				Assert.IsTrue(userAccount.Active);
 			}
 		}
+		[TestMethod]
+		public void TestUpdateUserAccount()
+		{
+			int id = 16;
+			var userEdit = sut.GetById(id);
+
+			userEdit.Email = "letmie1224n@emialo.com";
+			userEdit.Password = "letmien";
+			userEdit.Username = "TestCreateUser42";
+
+			sut.Update(userEdit);
+
+			var user = sut.GetById(userEdit.Id);
+
+			Assert.AreEqual(user.Username, userEdit.Username);
+			Assert.AreEqual(user.Email, userEdit.Email);
+			Assert.AreEqual(user.Password, userEdit.Password);
+
+		}
 	}
 }
