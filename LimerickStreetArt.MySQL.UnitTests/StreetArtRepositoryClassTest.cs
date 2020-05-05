@@ -31,7 +31,7 @@ namespace LimerickStreetArt.MySQL.UnitTests
 			Assert.IsNotNull(streetartRepositoryClass);
 		}
 		[TestMethod]
-		 public void TestCreate()
+		public void TestCreate()
 		{
 			var newStreetArt = new StreetArt
 			{
@@ -40,7 +40,7 @@ namespace LimerickStreetArt.MySQL.UnitTests
 				GpsLongitude = 2300000,
 				Title = "Jim version",
 				Timestamp = DateTime.Now,
-				Street="Evergreen Terrrace",
+				Street = "Evergreen Terrrace",
 				Image = "Image",
 				UserAccountId = 2,
 			};
@@ -53,7 +53,7 @@ namespace LimerickStreetArt.MySQL.UnitTests
 			Assert.AreEqual(streetArt.Title, newStreetArt.Title);
 			Assert.AreEqual(streetArt.Image, newStreetArt.Image);
 			Assert.AreEqual(streetArt.UserAccountId, streetArt.UserAccountId);
-			 Assert.AreEqual(streetArt.Id, streetArt.Id);
+			Assert.AreEqual(streetArt.Id, streetArt.Id);
 
 
 			sut.Delete(newStreetArt);
@@ -100,7 +100,8 @@ namespace LimerickStreetArt.MySQL.UnitTests
 			Assert.IsNotNull(users);
 		}
 		[TestMethod]
-		public void UpdateStreetArt() {
+		public void UpdateStreetArt()
+		{
 			var newStreetArt = new StreetArt
 			{
 				GpsLatitude = 2308769,
@@ -110,7 +111,7 @@ namespace LimerickStreetArt.MySQL.UnitTests
 				Street = "Evergreen Terrrace",
 				Image = "Image",
 				UserAccountId = 2,
-				 Id = 15,
+				Id = 15,
 			};
 			int Id = 15;
 			var streetArtEdit = sut.GetById(Id);

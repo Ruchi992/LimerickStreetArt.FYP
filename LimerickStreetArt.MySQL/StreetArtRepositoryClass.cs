@@ -166,13 +166,14 @@
 			return new StreetArt
 			{
 				GpsLatitude = (float)dataRow["GpsLatitude"],
-				GpsLongitude = (float)dataRow["GpsLongitude"] ,
+				GpsLongitude = (float)dataRow["GpsLongitude"],
+				Id = (int)dataRow["Id"],
 				Title = (string)dataRow["Title"],
-				Street= (string)dataRow["Street"],
+				Street = (string)dataRow["Street"],
 				Timestamp = (DateTime)dataRow["Timestamp"],
 				//Image = (String)dataRow["Image"],
 				UserAccountId = (int)dataRow["UserAccountId"],
-				
+
 			};
 		}
 
