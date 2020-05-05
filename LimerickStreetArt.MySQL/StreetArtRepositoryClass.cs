@@ -38,7 +38,7 @@
 					command.Parameters.AddWithValue("@Timestamp", streetart.Timestamp);
 					command.Parameters.AddWithValue("@Image", streetart.Image);
 					command.Parameters.AddWithValue("@UserAccountId", streetart.UserAccountId);
-
+					command.Parameters.AddWithValue("@Id", streetart.Id);
 					command.Prepare();
 					command.ExecuteNonQuery();
 

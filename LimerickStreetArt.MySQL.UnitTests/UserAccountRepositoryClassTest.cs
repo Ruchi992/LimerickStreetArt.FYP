@@ -130,6 +130,8 @@ namespace LimerickStreetArt.MySQL.UnitTests
 			userEdit.Email = "letmie1224n@emialo.com";
 			userEdit.Password = "letmien";
 			userEdit.Username = "TestCreateUser42";
+			userEdit.AccessLevel = 1;
+			userEdit.Active = true;			
 
 			sut.Update(userEdit);
 

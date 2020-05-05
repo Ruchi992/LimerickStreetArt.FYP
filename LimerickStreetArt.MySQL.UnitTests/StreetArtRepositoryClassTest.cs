@@ -31,7 +31,7 @@ namespace LimerickStreetArt.MySQL.UnitTests
 			Assert.IsNotNull(streetartRepositoryClass);
 		}
 		[TestMethod]
-		public void TestCreate()
+		 public void TestCreate()
 		{
 			var newStreetArt = new StreetArt
 			{
@@ -53,6 +53,7 @@ namespace LimerickStreetArt.MySQL.UnitTests
 			Assert.AreEqual(streetArt.Title, newStreetArt.Title);
 			Assert.AreEqual(streetArt.Image, newStreetArt.Image);
 			Assert.AreEqual(streetArt.UserAccountId, streetArt.UserAccountId);
+			 Assert.AreEqual(streetArt.Id, streetArt.Id);
 
 
 			sut.Delete(newStreetArt);
@@ -97,6 +98,47 @@ namespace LimerickStreetArt.MySQL.UnitTests
 
 			}
 			Assert.IsNotNull(users);
+		}
+		[TestMethod]
+		public void UpdateStreetArt() {
+			var newStreetArt = new StreetArt
+			{
+				GpsLatitude = 2308769,
+				GpsLongitude = 2300000,
+				Title = "Jim version",
+				Timestamp = DateTime.Now,
+				Street = "Evergreen Terrrace",
+				Image = "Image",
+				UserAccountId = 2,
+				 Id = 15,
+			};
+			int Id = 15;
+			var streetArtEdit = sut.GetById(Id);
+
+			streetArtEdit.GpsLatitude = 2308769;
+			streetArtEdit.GpsLongitude = 2300000;
+			streetArtEdit.Title = "Jim version";
+			streetArtEdit.Timestamp = DateTime.Now;
+			streetArtEdit.Street = "Evergreen Terrrace";
+			streetArtEdit.Image = "Image";
+			streetArtEdit.UserAccountId = 2;
+			streetArtEdit.Id = 15;
+
+
+			sut.Update(streetArtEdit);
+
+			var streetArt = sut.GetById(streetArtEdit.Id);
+
+			Assert.AreEqual(streetArt.GpsLongitude, streetArtEdit.GpsLongitude);
+			Assert.AreEqual(streetArt.GpsLatitude, streetArtEdit.GpsLatitude);
+			Assert.AreEqual(streetArt.Title, streetArtEdit.Title);
+			Assert.AreEqual(streetArt.Street, streetArtEdit.Street);
+			Assert.AreEqual(streetArt.Image, streetArtEdit.Image);
+			Assert.AreEqual(streetArt.Timestamp, streetArtEdit.Timestamp);
+			Assert.AreEqual(streetArt.UserAccountId, streetArtEdit.UserAccountId);
+			Assert.AreEqual(streetArt.Id, streetArtEdit.Id);
+
+
 		}
 	}
 }
