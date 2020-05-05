@@ -140,6 +140,8 @@ namespace LimerickStreetArt.MySQL.UnitTests
 			Assert.AreEqual(user.Username, userEdit.Username);
 			Assert.AreEqual(user.Email, userEdit.Email);
 			Assert.AreEqual(user.Password, userEdit.Password);
+			Assert.AreEqual(user.AccessLevel, userEdit.AccessLevel);
+			Assert.AreEqual(user.Active, userEdit.Active);
 
 		}
 	}

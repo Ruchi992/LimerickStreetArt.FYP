@@ -1,0 +1,69 @@
+﻿@model LimerickStreetArt.StreetArt
+
+@{
+    ViewData["Title"] = "StreetView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>StreetView</h1>
+
+<h4>StreetArt</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="StreetView">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GpsLatitude" class="control-label"></label>
+                <input asp-for="GpsLatitude" class="form-control" />
+                <span asp-validation-for="GpsLatitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GpsLongitude" class="control-label"></label>
+                <input asp-for="GpsLongitude" class="form-control" />
+                <span asp-validation-for="GpsLongitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Street" class="control-label"></label>
+                <input asp-for="Street" class="form-control" />
+                <span asp-validation-for="Street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Timestamp" class="control-label"></label>
+                <input asp-for="Timestamp" class="form-control" />
+                <span asp-validation-for="Timestamp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserAccountId" class="control-label"></label>
+                <input asp-for="UserAccountId" class="form-control" />
+                <span asp-validation-for="UserAccountId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
