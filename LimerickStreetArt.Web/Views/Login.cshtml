@@ -1,0 +1,28 @@
+﻿@model LimerickStreetArt.Web.Controllers.LoginUserAccount
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Login</h1>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(m => m.username)
+    @Html.TextBoxFor(m => m.username)
+    @Html.LabelFor(m => m.email)
+    @Html.TextBoxFor(m => m.email)
+}
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>LoginUserAccount</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+
+    <form asp-action="Login">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
