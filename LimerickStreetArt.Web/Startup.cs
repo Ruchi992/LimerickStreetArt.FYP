@@ -53,7 +53,7 @@ namespace LimerickStreetArt.Web
 			{
 				endpoints.MapControllerRoute(
 					name: "default",
-					pattern: "{controller=UserAccount}/{action=" + nameof(UserAccountController.Index) + "}/{id?}");
+					pattern: "{controller=" + nameof(Login) + "}/{action=" + nameof(Login.Index) + "}/{id?}");
 			});
 		}
 	}
