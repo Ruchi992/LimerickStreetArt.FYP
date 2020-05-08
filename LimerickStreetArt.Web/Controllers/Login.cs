@@ -44,11 +44,18 @@
 						return RedirectToAction(nameof(LoggedIn), "Login");
 					else
 					{
-						ModelState.AddModelError("", "Your Account has been locked");
+						ModelState.AddModelError("", "Your Account has been locked.  Please contact an Administrator");
 					}
 				}
+				else
+				{
+					ModelState.AddModelError("", "Invalid login attempt");
+				}
 			}
-			ModelState.AddModelError("", "Invalid login attempt");
+			else
+			{
+				ModelState.AddModelError("", "Invalid user inputs");
+			}
 			return View(model);
 		}
 	}
