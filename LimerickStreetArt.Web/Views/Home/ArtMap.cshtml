@@ -31,14 +31,19 @@
     var infowindow;
 
     function initMap() {
-        var Limerick = new google.maps.LatLng(-33.867, 151.195);//TODO: Change default location
+        var Limerick = new google.maps.LatLng(-33.867, 151.195);
 
         infowindow = new google.maps.InfoWindow();
-        for (i = 0; i < markers.length; i++) {
-            var data = markers[i]
+          for (i = 0; i < markers[0].length; i++) {
+              var lat = markers[0][i];
+              var lng = markers[0][i];
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat.GpsLatitude, lng.GpsLongitude),
+                map: map
+            });
         map = new google.maps.Map(document.getElementById('map'), { center: Limerick, zoom: 15 });
             map: map,
-                title: data.title
+
 
         @foreach (var item in Model)
         {
@@ -46,7 +51,7 @@
         createMarker("@item.Title", { lat: @item.GpsLatitude, lng: @item.GpsLongitude});
             </text>
         }
-    }
+         }
 
     function createMarker(placeTitle, positionLngLat) {
         var marker = new google.maps.Marker({
