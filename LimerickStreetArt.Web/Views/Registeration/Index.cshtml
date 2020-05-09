@@ -1,0 +1,41 @@
+﻿@model LimerickStreetArt.Web.Models.RegistrationModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<h2>RegistrationModel</h2>
+
+<form method="post" asp-controller="Registeration" asp-action="Index">
+
+    <div asp-validation-summary="@ValidationSummary.ModelOnly"></div>
+
+    <div>
+        <label asp-for="Username"></label>
+        <input asp-for="Username" />
+        <span asp-validation-for="Username"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div>
+        <label asp-for="ReconformPassword"></label>
+        <input asp-for="ReconformPassword" />
+        <span asp-validation-for="ReconformPassword"></span>
+    </div>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <label asp-for="DateOfBirth"></label>
+        <input asp-for="DateOfBirth" />
+        <span asp-validation-for="DateOfBirth"></span>
+    </div>
+    <input type="submit" value="Register" />
+</form>

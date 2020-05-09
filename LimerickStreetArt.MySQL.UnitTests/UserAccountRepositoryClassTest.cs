@@ -51,14 +51,14 @@ namespace LimerickStreetArt.MySQL.UnitTests
 			Assert.AreEqual(user.Username, username);
 		}
 		[TestMethod]
-		public void TestCreate()
+		public void TestCreateAndDelete()
 		{
 			UserAccount newUserAccount = new UserAccount
 			{
 				AccessLevel = 2,
-				Email = "letmien@emialo.com",
+				Email = "letmien2aa@emialo.com" + DateTime.Now.ToString(),
 				Password = "letmien",
-				Username = "TestCreateUser1",
+				Username = "TestCreateUser12" + DateTime.Now.ToString(),
 			};
 			sut.Create(newUserAccount);
 
@@ -85,20 +85,6 @@ namespace LimerickStreetArt.MySQL.UnitTests
 			var user = sut.GetById(id);
 
 			Assert.IsNull(user);
-		}
-		[TestMethod]
-		public void TestDelete()
-		{
-			int id = 8;
-			var user = sut.GetById(id);
-			Assert.IsNull(user);
-
-			sut.Delete(user);
-
-
-			var deletedUser = sut.GetById(id);
-
-			Assert.IsNull(deletedUser);
 		}
 		[TestMethod]
 		public void TestGetUserAccounts()
@@ -131,7 +117,7 @@ namespace LimerickStreetArt.MySQL.UnitTests
 			userEdit.Password = "letmien";
 			userEdit.Username = "TestCreateUser42";
 			userEdit.AccessLevel = 1;
-			userEdit.Active = true;			
+			userEdit.Active = true;
 
 			sut.Update(userEdit);
 

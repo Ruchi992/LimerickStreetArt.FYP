@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2020 at 10:52 PM
+-- Generation Time: May 09, 2020 at 01:53 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -21,99 +21,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `limerickstreetart`
 --
+DROP DATABASE IF EXISTS `limerickstreetart`;
 CREATE DATABASE IF NOT EXISTS `limerickstreetart` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `limerickstreetart`;
-
-DELIMITER $$
---
--- Procedures
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateStreetArt` (IN `GpsLatitude` FLOAT(10,8), IN `GpsLongitude` FLOAT(10,8), IN `Title` VARCHAR(45), IN `Street` VARCHAR(45), IN `Timestamp` DATETIME, IN `Image` VARCHAR(45), IN `UserAccountId` INT)  BEGIN
-INSERT INTO `limerickstreetart`.`streetart`
-(
-`GpsLatitude`,`GpsLongitude`,`Title`,`Street`,`Timestamp`,`Image`,`UserAccountId`)
-VALUES
-(
-GpsLatitude,GpsLongitude, Title, Street, Timestamp, Image, UserAccountId);
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CreateUserAccount` (IN `Username` VARCHAR(45), IN `Email` VARCHAR(45), IN `Password` VARCHAR(45), IN `Active` TINYINT, IN `DateOfBirth` DATE, IN `AccessLevel` INT(11), OUT `Id` INT(11))  BEGIN
-INSERT INTO `limerickstreetart`.`useraccount`
-(
-`Username`, `Email`, `Password`,`Active`,`DateOfBirth`,`AccessLevel`)
-VALUES
-(
-Username, Email, Password, Active, DateOfBirth, AccessLevel
-);
-SET @id=SCOPE_IDENTITY();
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteStreetArt` (IN `id` INT)  BEGIN
-delete from streetart
-where streetart.Id = id;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteUserAccount` (IN `Id_` INT)  BEGIN
-DELETE FROM useraccount WHERE `Id` = Id_;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetActiveUserAccounts` ()  BEGIN
-select * from `useraccount`
-where  `active`  =1;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetStreetArtById` (IN `_id` INT)  BEGIN
-SELECT * FROM streetart
-where `ID`= _id;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetStreetArtList` ()  BEGIN
-select * from limerickstreetart.streetart;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetUserAccountByCredentials` (IN `Username` VARCHAR(45), IN `Password` VARCHAR(45))  BEGIN
-select * from `useraccount` U
-where U.`Username` = username And U.`Password` = password;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetUserAccountById` (IN `Id_` INT)  BEGIN
-select * from `useraccount`
-where  `Id` = Id_;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GetUserAccounts` ()  BEGIN
-SELECT * FROM limerickstreetart.useraccount;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateStreetArt` (IN `_GpsLatitude` FLOAT(10,8), IN `GpsLongitude` FLOAT(10,8), IN `Title` VARCHAR(45), IN `Street` VARCHAR(45), IN `_Timestamp` DATETIME, IN `Image` VARCHAR(45), IN `UserAccountId` INT, IN `Id_` INT)  BEGIN
-UPDATE `limerickstreetart`.`streetart`
-SET
-`GpsLatitude` = _GpsLatitude,
-`GpsLongitude` =GpsLongitude,
-`Title` = Title,
-`Street` = Street,
-`Timestamp` =_Timestamp,
-`Image` = Image,
-`UserAccountId` =UserAccountId
- WHERE `Id` = Id_;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `UpdateUserAccount` (IN `Username` VARCHAR(45), IN `Email` VARCHAR(45), IN `Password` VARCHAR(45), IN `Active` TINYINT, IN `DateOfBirth` DATE, IN `AccessLevel` INT, IN `Id_` INT)  BEGIN
-UPDATE `limerickstreetart`.`useraccount`
-SET
-`Username` = Username,
-`Email` = Email,
-`Password` = Password,
-`Active` = Active,
-`DateOfBirth` = DateOfBirth,
-`AccessLevel` = AccessLevel
-
-WHERE `Id` = Id_;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -121,6 +31,7 @@ DELIMITER ;
 -- Table structure for table `streetart`
 --
 
+DROP TABLE IF EXISTS `streetart`;
 CREATE TABLE `streetart` (
   `Id` int(11) NOT NULL,
   `GpsLatitude` float(10,8) NOT NULL,
@@ -147,7 +58,13 @@ INSERT INTO `streetart` (`Id`, `GpsLatitude`, `GpsLongitude`, `Title`, `Street`,
 (9, 100.00000000, 100.00000000, 'Jim version', '', '2020-04-21 21:02:57', 0x496d616765, 2),
 (10, 100.00000000, 100.00000000, 'Jim version', 'Evergreen Terrrace', '2020-04-21 21:21:22', 0x496d616765, 2),
 (11, 100.00000000, 100.00000000, 'Jim version', 'Evergreen Terrrace', '2020-04-22 14:59:09', 0x496d616765, 2),
-(12, 100.00000000, 100.00000000, 'Jim version', 'Evergreen Terrrace', '2020-05-04 22:28:56', 0x496d616765, 2);
+(12, 100.00000000, 100.00000000, 'Jim version', 'Evergreen Terrrace', '2020-05-04 22:28:56', 0x496d616765, 2),
+(13, 1.00000000, 1.00000000, '1', '1', '0000-00-00 00:00:00', 0x31, 1),
+(14, 100.00000000, 100.00000000, 'Jim version', 'Evergreen Terrrace', '2020-05-09 00:30:13', 0x496d616765, 2),
+(15, 23.08769035, 23.00000000, 'Jim version', 'Evergreen Terrrace', '2020-05-09 00:44:35', 0x496d616765, 2),
+(16, 100.00000000, 100.00000000, 'Jim version', 'Evergreen Terrrace', '2020-05-09 00:32:25', 0x496d616765, 2),
+(17, 100.00000000, 100.00000000, 'Jim version', 'Evergreen Terrrace', '2020-05-09 00:32:25', 0x496d616765, 2),
+(18, 23.08769035, 23.00000000, 'Jim version', 'Evergreen Terrrace', '2020-05-09 00:35:47', 0x496d616765, 2);
 
 -- --------------------------------------------------------
 
@@ -155,6 +72,7 @@ INSERT INTO `streetart` (`Id`, `GpsLatitude`, `GpsLongitude`, `Title`, `Street`,
 -- Table structure for table `useraccount`
 --
 
+DROP TABLE IF EXISTS `useraccount`;
 CREATE TABLE `useraccount` (
   `Id` int(11) NOT NULL,
   `Username` varchar(45) NOT NULL,
@@ -172,9 +90,7 @@ CREATE TABLE `useraccount` (
 INSERT INTO `useraccount` (`Id`, `Username`, `Email`, `Password`, `Active`, `DateOfBirth`, `AccessLevel`) VALUES
 (1, 'Admin', 'Admin@streetart.ie', 'letmein', 1, '2000-01-01', 1),
 (2, 'Test', 'test@test.ie', 'letmein', 1, '2000-01-01', 2),
-(8, 'TestCreateUser1', 'letmien@emialo.com', 'letmien', 0, '0001-01-01', 2),
-(16, 'API Test', 'letmie1224n@emialo.com', 'Test Password', 0, '0001-01-01', 0),
-(24, 'ruchi', 'ruchi.devi@live.com', '23ef', 1, '0000-00-00', 2);
+(26, 'locked', 'locked@noreply.com', 'password', 0, '0000-00-00', 2);
 
 --
 -- Indexes for dumped tables
@@ -203,13 +119,13 @@ ALTER TABLE `useraccount`
 -- AUTO_INCREMENT for table `streetart`
 --
 ALTER TABLE `streetart`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `useraccount`
 --
 ALTER TABLE `useraccount`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Constraints for dumped tables

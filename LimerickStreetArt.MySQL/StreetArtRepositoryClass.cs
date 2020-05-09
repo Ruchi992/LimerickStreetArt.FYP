@@ -38,13 +38,17 @@
 					command.Parameters.AddWithValue("@Timestamp", streetart.Timestamp);
 					command.Parameters.AddWithValue("@Image", streetart.Image);
 					command.Parameters.AddWithValue("@UserAccountId", streetart.UserAccountId);
-					command.Parameters.AddWithValue("@Id", streetart.Id);
+
+					var idParamater = new MySqlParameter
+					{
+						Direction = ParameterDirection.Output,
+						ParameterName = "@id_",
+					};
+					command.Parameters.Add(idParamater);
+
 					command.Prepare();
 					command.ExecuteNonQuery();
-
-					//TODO :RD Id not updating
-					long id = command.LastInsertedId;
-					streetart.Id = (int)id;
+					streetart.Id = (int)idParamater.Value;
 				}
 			}
 		}
@@ -144,6 +148,7 @@
 					command.Parameters.AddWithValue("@Timestamp", streetart.Timestamp);
 					command.Parameters.AddWithValue("@Image", streetart.Image);
 					command.Parameters.AddWithValue("@UserAccountId", streetart.UserAccountId);
+					command.Parameters.AddWithValue("@Id_", streetart.Id);
 
 					command.Prepare();
 					command.ExecuteNonQuery();

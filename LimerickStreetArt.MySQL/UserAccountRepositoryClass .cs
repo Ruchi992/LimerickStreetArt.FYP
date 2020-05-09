@@ -31,27 +31,24 @@
 					CommandType = CommandType.StoredProcedure,
 				};
 				{
-
 					command.Parameters.AddWithValue("@AccessLevel", userAccount.AccessLevel);
 					command.Parameters.AddWithValue("@Active", userAccount.Active);
 					command.Parameters.AddWithValue("@DateOfBirth", userAccount.DateOfBirth);
 					command.Parameters.AddWithValue("@Email", userAccount.Email);
 					command.Parameters.AddWithValue("@Password", userAccount.Password);
-
 					command.Parameters.AddWithValue("@Username", userAccount.Username);
-					command.Parameters.AddWithValue("@id", userAccount.Id);
 
+					var idParamater = new MySqlParameter
+					{
+						Direction = ParameterDirection.Output,
+						ParameterName = "@id_",
+					};
+					command.Parameters.Add(idParamater);
 
 					command.Prepare();
 					command.ExecuteNonQuery();
 
-					//TODO :RD Id not updating : always returns 0, should return next number in column say 8
-					//TODO: out and fix why command.LastInsertedI isn't working
-					//TODO: out paramaters in stored procedures
-					//TODO: return select statementt from the stored procedure
-					//TODO: call a asepeerate stroed procedure to get LastInsertedId;
-					long id = command.LastInsertedId;
-					userAccount.Id = (int)id;
+					userAccount.Id = (int)idParamater.Value;
 				}
 			}
 		}
@@ -72,7 +69,7 @@
 					CommandType = CommandType.StoredProcedure,
 				};
 				{
-					command.Parameters.AddWithValue("@Id", userAccount.Id);
+					command.Parameters.AddWithValue("@Id_", userAccount.Id);
 					command.Prepare();
 					command.ExecuteNonQuery();
 				}
