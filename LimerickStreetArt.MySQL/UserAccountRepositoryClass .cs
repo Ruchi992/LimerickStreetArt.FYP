@@ -194,7 +194,6 @@
 				};
 
 				{
-
 					command.Parameters.AddWithValue("@AccessLevel", userAccount.AccessLevel);
 					command.Parameters.AddWithValue("@Active", userAccount.Active);
 					command.Parameters.AddWithValue("@DateOfBirth", userAccount.DateOfBirth);
