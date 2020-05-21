@@ -22,7 +22,7 @@
 		{
 			get;
 			set;
-		}		
+		}
 		public DateTime DateOfBirth
 		{
 			get;
@@ -33,6 +33,5 @@
 			get;
 			set;
 		}
-
 	}
 }

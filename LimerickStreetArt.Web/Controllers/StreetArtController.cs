@@ -2,12 +2,13 @@
 {
 	using LimerickStreetArt.MySQL;
 	using LimerickStreetArt.Repository;
+	using LimerickStreetArt.Web.Models;
 	using Microsoft.AspNetCore.Http;
 	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.Extensions.Configuration;
-    using System.Collections.Generic;
+	using System.Collections.Generic;
 
-    public class StreetArtController : Controller
+	public class StreetArtController : Controller
 	{
 		//TODO: Make default View for controller
 		private readonly StreetArtRepository streetArtRepository;
@@ -36,23 +37,28 @@
 		// GET: StreetArt/Create
 		public ActionResult Create()
 		{
-			return View();
+			var item = new StreetArtModel();
+			return View(item);
 		}
 
 		// POST: StreetArt/Create
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create(IFormCollection collection)
+		public ActionResult Create(StreetArtModel streetArtModel)
 		{
 			try
 			{
-				// TODO: Add insert logic here
+				var streetArt = new StreetArt { Street = streetArtModel.Street };
 
-				return RedirectToAction(nameof(Index));
+				// TODO: streetArt.UserAccountId = loggedInUser;
+				//
+
+				streetArtRepository.Create(streetArt);
+				return RedirectToAction(nameof(Details), new { streetArt.Id });
 			}
 			catch
 			{
-				return View();
+				return View(streetArtModel);
 			}
 		}
 
@@ -83,23 +89,22 @@
 		// GET: StreetArt/Delete/5
 		public ActionResult Delete(int id)
 		{
-			return View();
+			var streetArtData = streetArtRepository.GetById(id);
+			return View(streetArtData);
 		}
 
 		// POST: StreetArt/Delete/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Delete(int id, IFormCollection collection)
+		public ActionResult Delete(int id, StreetArt streetArtData)
 		{
 			try
 			{
-				// TODO: Add delete logic here
-
 				return RedirectToAction(nameof(Index));
 			}
 			catch
 			{
-				return View();
+				return View(streetArtData);
 			}
 		}
 	}

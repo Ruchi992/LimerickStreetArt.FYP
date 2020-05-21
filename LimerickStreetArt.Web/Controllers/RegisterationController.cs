@@ -29,11 +29,11 @@ namespace LimerickStreetArt.Web.Controllers
 			return View();
 		}
 		[HttpPost]
-		public ActionResult Index(RegistrationModel model)
+		public ActionResult Index(RegistrationModel registrationModel)
 		{
 			if (ModelState.IsValid)
 			{
-				bool passwordsDoNotMatch = model.Password != model.ReconformPassword;
+				bool passwordsDoNotMatch = registrationModel.Password != registrationModel.ReconformPassword;
 				bool usernameIsTaken = false;
 				bool emailIsInUse = false;
 
@@ -56,25 +56,25 @@ namespace LimerickStreetArt.Web.Controllers
 					{
 						AccessLevel = 2,
 						Active = true,
-						DateOfBirth = model.DateOfBirth,
-						Email = model.Email,
-						Password = model.Password,
-						Username = model.Username,
+						DateOfBirth = registrationModel.DateOfBirth,
+						Email = registrationModel.Email,
+						Password = registrationModel.Password,
+						Username = registrationModel.Username,
 					};
 					userAccountRepository.Create(userAccount);
 
-					var loginModel = new LoginModel { Username = model.Username };
+					var loginModel = new LoginModel { Username = registrationModel.Username };
 
 					return RedirectToAction("Index", "Login", loginModel);
 				}
 				else
 				{
-					return View(model);
+					return View(registrationModel);
 				}
 			}
 			else
 			{
-				return View(model);
+				return View(registrationModel);
 			}
 		}
 	}

@@ -36,23 +36,23 @@
 		// GET: UserAccount/Create
 		public ActionResult Create()
 		{
+			//userAccountRepository.Create(userAccount);
 			return View();
 		}
 
 		// POST: UserAccount/Create
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create(IFormCollection collection)
+		public ActionResult Create(UserAccount userAccount)
 		{
 			try
 			{
-				// TODO: Add insert logic here
-
+				userAccountRepository.Create(userAccount);
 				return RedirectToAction(nameof(Index));
 			}
 			catch
 			{
-				return View();
+				return View(userAccount);
 			}
 		}
 
@@ -69,22 +69,23 @@
 		public ActionResult Edit(int id, IFormCollection collection)
 		{
 
-				UserAccount userAccount = userAccountRepository.GetById(id);
+			UserAccount userAccount = userAccountRepository.GetById(id);
 
-				userAccount.Password = collection["Password"];
-				userAccount.Username = collection["Username"];
-				// TODO: Add update logic here
+			userAccount.Password = collection["Password"];
+			userAccount.Username = collection["Username"];
+			// TODO: Add update logic here
 
-				userAccountRepository.Update(userAccount);
+			userAccountRepository.Update(userAccount);
 
-				return RedirectToAction(nameof(Index));
+			return RedirectToAction(nameof(Index));
 
 		}
 
 		// GET: UserAccount/Delete/5
 		public ActionResult Delete(int id)
 		{
-			return View();
+			UserAccount userAccount = userAccountRepository.GetById(id);
+			return View(userAccount);
 		}
 
 		// POST: UserAccount/Delete/5
@@ -94,7 +95,10 @@
 		{
 			try
 			{
-				// TODO: Add delete logic here
+				UserAccount userAccount = userAccountRepository.GetById(id);
+
+				userAccount.Password = collection["Password"];
+				userAccount.Username = collection["Username"];
 
 				return RedirectToAction(nameof(Index));
 			}

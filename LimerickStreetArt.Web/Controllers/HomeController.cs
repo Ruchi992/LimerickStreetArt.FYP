@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using LimerickStreetArt.Web.Models;
-using LimerickStreetArt.Repository;
-using LimerickStreetArt.MySQL;
-using Microsoft.Extensions.Configuration;
-
-namespace LimerickStreetArt.Web.Controllers
+﻿namespace LimerickStreetArt.Web.Controllers
 {
+	using System.Collections.Generic;
+	using System.Diagnostics;
+	using Microsoft.AspNetCore.Mvc;
+	using Microsoft.Extensions.Logging;
+	using LimerickStreetArt.Web.Models;
+	using LimerickStreetArt.Repository;
+	using LimerickStreetArt.MySQL;
+	using Microsoft.Extensions.Configuration;
+
 	public class HomeController : Controller
 	{
 		private readonly StreetArtRepository _streetArtRepository;
-		private readonly ILogger<HomeController> _logger;
-
-		public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
+		//private readonly ILogger<HomeController> _logger;
+		//ILogger<HomeController> logger,
+		public HomeController(IConfiguration configuration)
 		{
 			var databaseClass = new DatabaseClass
 			{
@@ -25,7 +22,7 @@ namespace LimerickStreetArt.Web.Controllers
 			};
 			_streetArtRepository = new StreetArtRepositoryClass(databaseClass);
 
-			_logger = logger;
+			///_logger = logger;
 		}
 
 		public IActionResult Index()
