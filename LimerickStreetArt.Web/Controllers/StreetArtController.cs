@@ -1,5 +1,6 @@
 ﻿namespace LimerickStreetArt.Web.Controllers
 {
+	using AutoMapper;
 	using LimerickStreetArt.MySQL;
 	using LimerickStreetArt.Repository;
 	using LimerickStreetArt.Web.Models;
@@ -10,15 +11,19 @@
 
 	public class StreetArtController : Controller
 	{
+		private readonly IMapper _mapper;
+
 		//TODO: Make default View for controller
 		private readonly StreetArtRepository streetArtRepository;
-		public StreetArtController(IConfiguration configuration)
+		public StreetArtController(IConfiguration configuration, IMapper mapper)
 		{
 			var databaseClass = new DatabaseClass
 			{
 				ConnectionString = configuration.GetConnectionString("LocalDatabase"),
 			};
 			streetArtRepository = new StreetArtRepositoryClass(databaseClass);
+			_mapper = mapper;
+
 		}
 		// GET: StreetArt
 		public ActionResult Index()
@@ -31,7 +36,10 @@
 		public ActionResult Details(int id)
 		{
 			StreetArt streetArt = streetArtRepository.GetById(id);
-			return View(streetArt);
+
+			var streetArtModel = _mapper.Map<StreetArtModel>(streetArt);
+
+			return View(streetArtModel);
 		}
 
 		// GET: StreetArt/Create
@@ -66,24 +74,19 @@
 		public ActionResult Edit(int id)
 		{
 			StreetArt streetArt = streetArtRepository.GetById(id);
-			return View(streetArt);
+
+			var streetArtModel = _mapper.Map<StreetArtModel>(streetArt);
+			return View(streetArtModel);
 		}
 
 		// POST: StreetArt/Edit/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit(int id, IFormCollection collection)
+		public ActionResult Edit(int id, StreetArtModel streetArtModel)
 		{
-			try
-			{
-				// TODO: Add update logic here
-
-				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				return View();
-			}
+			StreetArt streetArt = _mapper.Map<StreetArt>(streetArtModel);
+			streetArtRepository.Update(streetArt);
+			return RedirectToAction(nameof(Index));
 		}
 
 		// GET: StreetArt/Delete/5
