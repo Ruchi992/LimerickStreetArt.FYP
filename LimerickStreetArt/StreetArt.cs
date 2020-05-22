@@ -4,7 +4,6 @@
 	public class StreetArt
 	{
 		public int Id { get; set; }
-
 		public float GpsLatitude
 		{
 			get;
@@ -39,6 +38,6 @@
 		{
 			get;
 			set;
-		}		
+		}
 	}
 }

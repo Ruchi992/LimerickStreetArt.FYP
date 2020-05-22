@@ -1,22 +1,26 @@
 ﻿namespace LimerickStreetArt.Web.Controllers
 {
 	using System.Collections.Generic;
+	using AutoMapper;
 	using LimerickStreetArt.MySQL;
 	using LimerickStreetArt.Repository;
+	using LimerickStreetArt.Web.Models;
 	using Microsoft.AspNetCore.Http;
 	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.Extensions.Configuration;
 
 	public class UserAccountController : Controller
 	{
+		private readonly IMapper _mapper;
 		private readonly UserAccountRepository userAccountRepository;
-		public UserAccountController(IConfiguration configuration)
+		public UserAccountController(IConfiguration configuration, IMapper mapper)
 		{
 			var databaseClass = new DatabaseClass
 			{
 				ConnectionString = configuration.GetConnectionString("LocalDatabase"),
 			};
 			userAccountRepository = new UserAccountRepositoryClass(databaseClass);
+			_mapper = mapper;
 		}
 
 		// GET: UserAccount
@@ -30,7 +34,10 @@
 		public ActionResult Details(int id)
 		{
 			UserAccount userAccount = userAccountRepository.GetById(id);
-			return View(userAccount);
+
+			var userAccountModel = _mapper.Map<UserAccountModel>(userAccount);
+
+			return View(userAccountModel);
 		}
 
 		// GET: UserAccount/Create
@@ -60,19 +67,28 @@
 		public ActionResult Edit(int id)
 		{
 			UserAccount userAccount = userAccountRepository.GetById(id);
-			return View(userAccount);
+
+			var userAccountModel = _mapper.Map<UserAccountModel>(userAccount);
+
+
+			return View(userAccountModel);
 		}
 
 		// POST: UserAccount/Edit/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit(int id, IFormCollection collection)
+		public ActionResult Edit(int id, UserAccountModel userAccountModel)
 		{
 
-			UserAccount userAccount = userAccountRepository.GetById(id);
+			//UserAccount userAccount = userAccountRepository.GetById(id);
 
-			userAccount.Password = collection["Password"];
-			userAccount.Username = collection["Username"];
+			UserAccount userAccount = _mapper.Map<UserAccount>(userAccountModel);
+
+
+
+			//userAccount.Password = userAccountModel.Password;
+			//userAccount.Username = userAccountModel.Username;
+
 			// TODO: Add update logic here
 
 			userAccountRepository.Update(userAccount);

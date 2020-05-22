@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AutoMapper;
 
 namespace LimerickStreetArt.Web
 {
@@ -25,6 +26,20 @@ namespace LimerickStreetArt.Web
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllersWithViews();
+			//services.AddAutoMapper(typeof(Startup));
+
+			// Auto Mapper Configurations
+
+			var mappingConfig = new MapperConfiguration(mc =>
+			{
+				mc.AddProfile(new AutoMapping());
+			});
+
+			IMapper mapper = mappingConfig.CreateMapper();
+			services.AddSingleton(mapper);
+
+
+
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
