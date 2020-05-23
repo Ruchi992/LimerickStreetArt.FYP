@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using LimerickStreetArt.Web.Data;
 
 namespace LimerickStreetArt.Web
 {
@@ -39,12 +38,6 @@ namespace LimerickStreetArt.Web
 
 			IMapper mapper = mappingConfig.CreateMapper();
 			services.AddSingleton(mapper);
-
-		    services.AddDbContext<LimerickStreetArtWebContext>(options =>
-		            options.UseSqlServer(Configuration.GetConnectionString("LimerickStreetArtWebContext")));
-
-
-
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
