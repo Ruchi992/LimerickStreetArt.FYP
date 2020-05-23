@@ -11,10 +11,8 @@
 
 	public class StreetArtController : Controller
 	{
-		//TODO: RD Mehtods in alphabet order
 		private readonly IMapper _mapper;
 
-		//TODO: Make default View for controller
 		private readonly StreetArtRepository streetArtRepository;
 		public StreetArtController(IConfiguration configuration, IMapper mapper)
 		{
@@ -26,42 +24,29 @@
 			_mapper = mapper;
 
 		}
-		// GET: StreetArt
-		public ActionResult Index()
-		{
-			List<StreetArt> streetArtList = streetArtRepository.GetStreetArtList();
-			return View(streetArtList);
-		}
-
 		// GET: StreetArt/Create
 		public ActionResult Create()
 		{
-
-			var item = new StreetArtModel();
-			return View(item);
+			//var item = new StreetArtModel();
+			return View();
 		}
 
 		// POST: StreetArt/Create
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create(StreetArtModel streetArtModel)
+		public ActionResult Create(StreetArt streetArt)
 		{
-			//TODO Create here
 			try
 			{
-				var streetArt = new StreetArt { Street = streetArtModel.Street };
-
-				// TODO: streetArt.UserAccountId = loggedInUser;
-				//
-
 				streetArtRepository.Create(streetArt);
-				return RedirectToAction(nameof(Details), new { streetArt.Id });
+				return RedirectToAction(nameof(Index));
 			}
 			catch
 			{
-				return View(streetArtModel);
+				return View(streetArt);
 			}
 		}
+
 		// GET: StreetArt/Details/5
 		public ActionResult Details(int id)
 		{
@@ -71,9 +56,29 @@
 
 			return View(streetArtModel);
 		}
+		// POST: StreetArt/Delete/5
+		// GET: StreetArt/Delete/5
+		public ActionResult Delete(int id)
+		{
+			var streetArtData = streetArtRepository.GetById(id);
+			return View(streetArtData);
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Delete(int id, StreetArtModel streetArtModel)
+		{
+			try
+			{
+				StreetArt streetArt = streetArtRepository.GetById(id);
+				streetArtRepository.Delete(streetArt);
+				return RedirectToAction(nameof(Index));
 
-
-
+			}
+			catch
+			{
+				return View();
+			}
+		}
 
 		// GET: StreetArt/Edit/5
 		public ActionResult Edit(int id)
@@ -93,27 +98,15 @@
 			streetArtRepository.Update(streetArt);
 			return RedirectToAction(nameof(Index));
 		}
-
-		// GET: StreetArt/Delete/5
-		public ActionResult Delete(int id)
+		// GET: StreetArt
+		public ActionResult Index()
 		{
-			var streetArtData = streetArtRepository.GetById(id);
-			return View(streetArtData);
+			List<StreetArt> streetArtList = streetArtRepository.GetStreetArtList();
+			return View(streetArtList);
 		}
 
-		// POST: StreetArt/Delete/5
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Delete(int id, StreetArt streetArtData)
-		{
-			try
-			{
-				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				return View(streetArtData);
-			}
-		}
+
+
+
 	}
 }
