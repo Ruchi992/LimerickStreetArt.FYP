@@ -11,6 +11,7 @@
 
 	public class StreetArtController : Controller
 	{
+		//TODO: RD Mehtods in alphabet order
 		private readonly IMapper _mapper;
 
 		//TODO: Make default View for controller
@@ -32,19 +33,10 @@
 			return View(streetArtList);
 		}
 
-		// GET: StreetArt/Details/5
-		public ActionResult Details(int id)
-		{
-			StreetArt streetArt = streetArtRepository.GetById(id);
-
-			var streetArtModel = _mapper.Map<StreetArtModel>(streetArt);
-
-			return View(streetArtModel);
-		}
-
 		// GET: StreetArt/Create
 		public ActionResult Create()
 		{
+
 			var item = new StreetArtModel();
 			return View(item);
 		}
@@ -54,6 +46,7 @@
 		[ValidateAntiForgeryToken]
 		public ActionResult Create(StreetArtModel streetArtModel)
 		{
+			//TODO Create here
 			try
 			{
 				var streetArt = new StreetArt { Street = streetArtModel.Street };
@@ -69,6 +62,18 @@
 				return View(streetArtModel);
 			}
 		}
+		// GET: StreetArt/Details/5
+		public ActionResult Details(int id)
+		{
+			StreetArt streetArt = streetArtRepository.GetById(id);
+
+			var streetArtModel = _mapper.Map<StreetArtModel>(streetArt);
+
+			return View(streetArtModel);
+		}
+
+
+
 
 		// GET: StreetArt/Edit/5
 		public ActionResult Edit(int id)

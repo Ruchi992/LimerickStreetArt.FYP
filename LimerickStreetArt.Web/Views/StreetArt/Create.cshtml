@@ -1,4 +1,4 @@
-﻿@model LimerickStreetArt.Web.Models.StreetArtModel
+﻿@model LimerickStreetArt.StreetArt
 
 @{
     ViewData["Title"] = "Create";
@@ -6,7 +6,7 @@
 
 <h1>Create</h1>
 
-<h4>StreetArtModel</h4>
+<h4>StreetArt</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -40,12 +40,17 @@
             <div class="form-group">
                 <label asp-for="Timestamp" class="control-label"></label>
                 <input asp-for="Timestamp" class="form-control" />
-                <span asp-validation-for="Timestamp" class="choose custom-file"></span>
+                <span asp-validation-for="Timestamp" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="Image" class="form-control custom-file-input" />
                 <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />
                 <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserAccountId" class="control-label"></label>
+                <input asp-for="UserAccountId" class="form-control" />
+                <span asp-validation-for="UserAccountId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -57,18 +62,6 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-@section Scripts{
-    <script>
-        $(document).ready(function ()
-        {
-            $('.custom-file-input ').on("change", function ()
-            {
-                var fileName = $(this).val().split("\\").pop();
-                $(this).next('.custom-file-input').html(fileName);
-            }
-           });
-    </script>
-}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

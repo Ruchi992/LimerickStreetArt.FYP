@@ -29,18 +29,6 @@
 			List<UserAccount> userAccounts = userAccountRepository.GetUserAccounts();
 			return View(userAccounts);
 		}
-
-		// GET: UserAccount/Details/5
-		public ActionResult Details(int id)
-		{
-			UserAccount userAccount = userAccountRepository.GetById(id);
-
-			var userAccountModel = _mapper.Map<UserAccountModel>(userAccount);
-
-			return View(userAccountModel);
-		}
-
-		// GET: UserAccount/Create
 		public ActionResult Create()
 		{
 			//userAccountRepository.Create(userAccount);
@@ -62,6 +50,19 @@
 				return View(userAccount);
 			}
 		}
+
+		// GET: UserAccount/Details/5
+		public ActionResult Details(int id)
+		{
+			UserAccount userAccount = userAccountRepository.GetById(id);
+
+			var userAccountModel = _mapper.Map<UserAccountModel>(userAccount);
+
+			return View(userAccountModel);
+		}
+
+		// GET: UserAccount/Create
+
 
 		// GET: UserAccount/Edit/5
 		public ActionResult Edit(int id)

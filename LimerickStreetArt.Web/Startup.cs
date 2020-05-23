@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using LimerickStreetArt.Web.Data;
 
 namespace LimerickStreetArt.Web
 {
@@ -37,6 +39,9 @@ namespace LimerickStreetArt.Web
 
 			IMapper mapper = mappingConfig.CreateMapper();
 			services.AddSingleton(mapper);
+
+		    services.AddDbContext<LimerickStreetArtWebContext>(options =>
+		            options.UseSqlServer(Configuration.GetConnectionString("LimerickStreetArtWebContext")));
 
 
 
