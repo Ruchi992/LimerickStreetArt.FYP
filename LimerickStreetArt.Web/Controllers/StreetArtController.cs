@@ -7,12 +7,12 @@
 	using Microsoft.AspNetCore.Http;
 	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.Extensions.Configuration;
+	using System;
 	using System.Collections.Generic;
 
 	public class StreetArtController : Controller
 	{
 		private readonly IMapper _mapper;
-
 		private readonly StreetArtRepository streetArtRepository;
 		public StreetArtController(IConfiguration configuration, IMapper mapper)
 		{
@@ -24,14 +24,12 @@
 			_mapper = mapper;
 
 		}
-		// GET: StreetArt/Create
+
 		public ActionResult Create()
 		{
 			//var item = new StreetArtModel();
 			return View();
 		}
-
-		// POST: StreetArt/Create
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Create(StreetArt streetArt)
@@ -46,8 +44,6 @@
 				return View(streetArt);
 			}
 		}
-
-		// GET: StreetArt/Details/5
 		public ActionResult Details(int id)
 		{
 			StreetArt streetArt = streetArtRepository.GetById(id);
@@ -56,31 +52,36 @@
 
 			return View(streetArtModel);
 		}
-		// POST: StreetArt/Delete/5
-		// GET: StreetArt/Delete/5
 		public ActionResult Delete(int id)
 		{
-			var streetArtData = streetArtRepository.GetById(id);
-			return View(streetArtData);
+			var streetArt = streetArtRepository.GetById(id);
+			return View(streetArt);
 		}
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Delete(int id, StreetArtModel streetArtModel)
+		public ActionResult Delete(int id, StreetArt streetArtModel)
 		{
-			try
+			if (ModelState.IsValid)
 			{
 				StreetArt streetArt = streetArtRepository.GetById(id);
-				streetArtRepository.Delete(streetArt);
-				return RedirectToAction(nameof(Index));
-
+				try
+				{
+					streetArtRepository.Delete(streetArt);
+					return RedirectToAction(nameof(Index));
+				}
+				catch (Exception exception)
+				{
+					ModelState.AddModelError("", $"Failed to Delete {streetArtModel.Id}");
+					ModelState.AddModelError("", $"Error: {exception.Message}");
+					return View(streetArt);
+				}
 			}
-			catch
+			else
 			{
-				return View();
+				ModelState.AddModelError("", $"Nodel is not valid");
+				return View(streetArtModel);
 			}
 		}
-
-		// GET: StreetArt/Edit/5
 		public ActionResult Edit(int id)
 		{
 			StreetArt streetArt = streetArtRepository.GetById(id);
@@ -88,8 +89,6 @@
 			var streetArtModel = _mapper.Map<StreetArtModel>(streetArt);
 			return View(streetArtModel);
 		}
-
-		// POST: StreetArt/Edit/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit(int id, StreetArtModel streetArtModel)
@@ -98,15 +97,10 @@
 			streetArtRepository.Update(streetArt);
 			return RedirectToAction(nameof(Index));
 		}
-		// GET: StreetArt
 		public ActionResult Index()
 		{
 			List<StreetArt> streetArtList = streetArtRepository.GetStreetArtList();
 			return View(streetArtList);
 		}
-
-
-
-
 	}
 }
