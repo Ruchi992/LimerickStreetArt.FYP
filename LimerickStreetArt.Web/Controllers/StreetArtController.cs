@@ -8,6 +8,7 @@
 	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.Extensions.Configuration;
 	using System;
+	using System.Collections;
 	using System.Collections.Generic;
 	using static System.Net.Mime.MediaTypeNames;
 
@@ -15,6 +16,8 @@
 	{
 		private readonly IMapper _mapper;
 		private readonly StreetArtRepository streetArtRepository;
+		private object Directory;
+
 		public StreetArtController(IConfiguration configuration, IMapper mapper)
 		{
 			var databaseClass = new DatabaseClass
@@ -99,12 +102,18 @@
 			return RedirectToAction(nameof(Index));
 		}
 		[HttpPost]
-		public IActionResult Upload(IFormFile file)
+		public IActionResult ImageUpload(IFormFile file)
 		{
-			using var image = image.load(file.OpenReadStream());
-			image.Mutate(x => x.Resize(256, 256));
-			image.Save("...");
-			return Ok();
+			if (file != null && file.Length > 0)
+			{
+				var imagePath = @"\Upload\Image\";
+				var uploadPath = env.WebRootPath + imagePath;
+
+				if (Directory.Exists(uploadPath))
+				{
+					Directory.CreateDirectory(uploadPath);
+				}
+			}
 		}
 		public ActionResult Index()
 		{
