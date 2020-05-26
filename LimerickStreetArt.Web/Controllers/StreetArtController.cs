@@ -9,6 +9,7 @@
 	using Microsoft.Extensions.Configuration;
 	using System;
 	using System.Collections.Generic;
+	using static System.Net.Mime.MediaTypeNames;
 
 	public class StreetArtController : Controller
 	{
@@ -96,6 +97,14 @@
 			StreetArt streetArt = _mapper.Map<StreetArt>(streetArtModel);
 			streetArtRepository.Update(streetArt);
 			return RedirectToAction(nameof(Index));
+		}
+		[HttpPost]
+		public IActionResult Upload(IFormFile file)
+		{
+			using var image = image.load(file.OpenReadStream());
+			image.Mutate(x => x.Resize(256, 256));
+			image.Save("...");
+			return Ok();
 		}
 		public ActionResult Index()
 		{
