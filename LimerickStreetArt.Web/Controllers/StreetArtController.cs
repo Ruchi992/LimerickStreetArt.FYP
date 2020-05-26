@@ -4,21 +4,23 @@
 	using LimerickStreetArt.MySQL;
 	using LimerickStreetArt.Repository;
 	using LimerickStreetArt.Web.Models;
+	using Microsoft.AspNetCore.Hosting;
 	using Microsoft.AspNetCore.Http;
 	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.Extensions.Configuration;
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
+	using System.IO;
 	using static System.Net.Mime.MediaTypeNames;
 
 	public class StreetArtController : Controller
 	{
+		private readonly IWebHostEnvironment _env;
 		private readonly IMapper _mapper;
 		private readonly StreetArtRepository streetArtRepository;
-		private object Directory;
 
-		public StreetArtController(IConfiguration configuration, IMapper mapper)
+		public StreetArtController(IConfiguration configuration, IMapper mapper, IWebHostEnvironment env)
 		{
 			var databaseClass = new DatabaseClass
 			{
@@ -26,9 +28,14 @@
 			};
 			streetArtRepository = new StreetArtRepositoryClass(databaseClass);
 			_mapper = mapper;
+			_env = env;
 
 		}
-
+		#region Properties
+		#endregion
+		public string StreetartUploadDirectory { get => Path.Combine(_env.WebRootPath, "images", "streetart"); }
+		#region Public Methods
+		#endregion
 		public ActionResult Create()
 		{
 			//var item = new StreetArtModel();
@@ -97,28 +104,52 @@
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit(int id, StreetArtModel streetArtModel)
 		{
-			StreetArt streetArt = _mapper.Map<StreetArt>(streetArtModel);
-			streetArtRepository.Update(streetArt);
-			return RedirectToAction(nameof(Index));
-		}
-		[HttpPost]
-		public IActionResult ImageUpload(IFormFile file)
-		{
-			if (file != null && file.Length > 0)
+			StreetArt streetArt = streetArtRepository.GetById(id);
+			_mapper.Map<StreetArtModel, StreetArt>(streetArtModel, streetArt);
+			if (streetArtModel.Image != null)
 			{
-				var imagePath = @"\Upload\Image\";
-				var uploadPath = env.WebRootPath + imagePath;
-
-				if (Directory.Exists(uploadPath))
-				{
-					Directory.CreateDirectory(uploadPath);
-				}
+				String fileExtension = Path.GetExtension(streetArtModel.Image.FileName);
+				String filename = streetArtModel.Id + fileExtension;
+				streetArt.Image = filename;
 			}
+			else
+			{
+				streetArt.Image = String.Empty;
+			}
+			streetArtRepository.Update(streetArt);
+			SaveImage(streetArtModel);
+			return RedirectToAction(nameof(Index));
 		}
 		public ActionResult Index()
 		{
 			List<StreetArt> streetArtList = streetArtRepository.GetStreetArtList();
 			return View(streetArtList);
+		}
+		#region Private Methods
+		#endregion
+		private void SaveImage(StreetArtModel streetArtModel)
+		{
+			IFormFile formFile = streetArtModel.Image;
+			Console.WriteLine($"Street Art:{streetArtModel.Id}, Content-Type:{formFile.ContentType}");
+			if (formFile != null && formFile.Length > 0)
+			{
+				EnsureStreetartUploadDirectoryExists();
+
+				String fileExtension = Path.GetExtension(formFile.FileName);
+				String filename = streetArtModel.Id + fileExtension;
+				String filePath = Path.Combine(this.StreetartUploadDirectory, filename);
+				using (var fileStream = new FileStream(filePath, FileMode.Create))
+				{
+					formFile.CopyToAsync(fileStream);
+				}
+			}
+		}
+		private void EnsureStreetartUploadDirectoryExists()
+		{
+			if (!Directory.Exists(StreetartUploadDirectory))
+			{
+				Directory.CreateDirectory(StreetartUploadDirectory);
+			}
 		}
 	}
 }
