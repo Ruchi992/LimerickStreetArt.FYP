@@ -108,6 +108,7 @@ namespace LimerickStreetArt.MySQL.UnitTests
 			}
 		}
 		[TestMethod]
+		[Ignore]
 		public void TestUpdateUserAccount()
 		{
 			int id = 16;

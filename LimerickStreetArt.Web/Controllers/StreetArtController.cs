@@ -44,16 +44,26 @@
 		}
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create(StreetArt streetArt)
+		public ActionResult Create(StreetArt StreetArtModel)
 		{
-			try
+			if (ModelState.IsValid)
 			{
-				streetArtRepository.Create(streetArt);
-				return RedirectToAction(nameof(Index));
+				try
+				{
+					streetArtRepository.Create(StreetArtModel);
+					var streetArModel = _mapper.Map<StreetArtModel>(StreetArtModel);
+					return RedirectToAction(nameof(Index));
+				}
+				catch
+				{
+					return View(StreetArtModel);
+				}
 			}
-			catch
+
+			else
 			{
-				return View(streetArt);
+				ModelState.AddModelError("", $"Model is not valid");
+				return View(StreetArtModel);
 			}
 		}
 		public ActionResult Details(int id)
