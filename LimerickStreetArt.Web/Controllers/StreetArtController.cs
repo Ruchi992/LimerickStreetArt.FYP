@@ -12,8 +12,8 @@
 	using System.Collections;
 	using System.Collections.Generic;
 	using System.IO;
-    using System.Threading.Tasks;
-    using static System.Net.Mime.MediaTypeNames;
+	using System.Threading.Tasks;
+	using static System.Net.Mime.MediaTypeNames;
 
 	public class StreetArtController : Controller
 	{
@@ -104,6 +104,8 @@
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit(int id, StreetArtEditModel streetArtEditModel)
 		{
+			//TODO: RD if (ModelState.IsValid)
+
 			StreetArt streetArt = streetArtRepository.GetById(id);
 			_mapper.Map<StreetArtEditModel, StreetArt>(streetArtEditModel, streetArt);
 			streetArt.Image = SaveImageAsync(streetArtEditModel).Result;
@@ -121,7 +123,7 @@
 		{
 			IFormFile formFile = streetArtModel.Image;
 			Console.WriteLine($"Street Art:{streetArtModel.Id}, Content-Type:{formFile.ContentType}");
-			if (formFile != null && formFile.Length > 0)
+			if (formFile != null && ValidFileSize(formFile) && ValidFileImageFormat(formFile))
 			{
 				EnsureStreetartUploadDirectoryExists();
 
@@ -136,6 +138,19 @@
 			}
 			return string.Empty;
 		}
+
+		private static bool ValidFileSize(IFormFile formFile)
+		{
+			return formFile.Length > 0 && formFile.Length <= maxFileSize;
+		}
+		private static bool ValidFileImageFormat(IFormFile formFile)
+		{
+			var fileExtension = Path.GetExtension(formFile.FileName);
+			return fileExtension.ToLower() == jpeg;
+		}
+		private readonly static string jpeg = ".jpg";
+		private readonly static int maxFileSize = 2000000;
+
 		private void EnsureStreetartUploadDirectoryExists()
 		{
 			if (!Directory.Exists(StreetartUploadDirectory))
