@@ -6,7 +6,7 @@ namespace LimerickStreetArt.Web.Models
 {
 	public class StreetArtModel
 	{
-		public int Id { get; }
+		public int Id { get; set; }
 		public float GpsLatitude
 		{
 			get;
@@ -32,6 +32,6 @@ namespace LimerickStreetArt.Web.Models
 			get;
 			set;
 		}
-		public IFormFile Image { get; set; }
+		public String Image { get; set; }
 	}
 }

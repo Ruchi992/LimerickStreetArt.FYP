@@ -4,18 +4,24 @@
 	using LimerickStreetArt.MySQL;
 	using LimerickStreetArt.Repository;
 	using LimerickStreetArt.Web.Models;
+	using Microsoft.AspNetCore.Hosting;
 	using Microsoft.AspNetCore.Http;
 	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.Extensions.Configuration;
+	using System;
+	using System.Collections;
 	using System.Collections.Generic;
+	using System.IO;
+    using System.Threading.Tasks;
+    using static System.Net.Mime.MediaTypeNames;
 
 	public class StreetArtController : Controller
 	{
+		private readonly IWebHostEnvironment _env;
 		private readonly IMapper _mapper;
-
-		//TODO: Make default View for controller
 		private readonly StreetArtRepository streetArtRepository;
-		public StreetArtController(IConfiguration configuration, IMapper mapper)
+
+		public StreetArtController(IConfiguration configuration, IMapper mapper, IWebHostEnvironment env)
 		{
 			var databaseClass = new DatabaseClass
 			{
@@ -23,91 +29,118 @@
 			};
 			streetArtRepository = new StreetArtRepositoryClass(databaseClass);
 			_mapper = mapper;
+			_env = env;
 
 		}
-		// GET: StreetArt
-		public ActionResult Index()
+		#region Properties
+		#endregion
+		public string StreetartUploadDirectory { get => Path.Combine(_env.WebRootPath, "images", "streetart"); }
+		#region Public Methods
+		#endregion
+		public ActionResult Create()
 		{
-			List<StreetArt> streetArtList = streetArtRepository.GetStreetArtList();
-			return View(streetArtList);
+			//var item = new StreetArtModel();
+			return View();
 		}
-
-		// GET: StreetArt/Details/5
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Create(StreetArt streetArt)
+		{
+			try
+			{
+				streetArtRepository.Create(streetArt);
+				return RedirectToAction(nameof(Index));
+			}
+			catch
+			{
+				return View(streetArt);
+			}
+		}
 		public ActionResult Details(int id)
 		{
 			StreetArt streetArt = streetArtRepository.GetById(id);
 
 			var streetArtModel = _mapper.Map<StreetArtModel>(streetArt);
-
 			return View(streetArtModel);
 		}
-
-		// GET: StreetArt/Create
-		public ActionResult Create()
+		public ActionResult Delete(int id)
 		{
-			var item = new StreetArtModel();
-			return View(item);
+			var streetArt = streetArtRepository.GetById(id);
+			return View(streetArt);
 		}
-
-		// POST: StreetArt/Create
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create(StreetArtModel streetArtModel)
+		public ActionResult Delete(int id, StreetArt streetArtModel)
 		{
-			try
+			if (ModelState.IsValid)
 			{
-				var streetArt = new StreetArt { Street = streetArtModel.Street };
-
-				// TODO: streetArt.UserAccountId = loggedInUser;
-				//
-
-				streetArtRepository.Create(streetArt);
-				return RedirectToAction(nameof(Details), new { streetArt.Id });
+				StreetArt streetArt = streetArtRepository.GetById(id);
+				try
+				{
+					streetArtRepository.Delete(streetArt);
+					return RedirectToAction(nameof(Index));
+				}
+				catch (Exception exception)
+				{
+					ModelState.AddModelError("", $"Failed to Delete {streetArtModel.Id}");
+					ModelState.AddModelError("", $"Error: {exception.Message}");
+					return View(streetArt);
+				}
 			}
-			catch
+			else
 			{
+				ModelState.AddModelError("", $"Nodel is not valid");
 				return View(streetArtModel);
 			}
 		}
-
-		// GET: StreetArt/Edit/5
 		public ActionResult Edit(int id)
 		{
 			StreetArt streetArt = streetArtRepository.GetById(id);
 
-			var streetArtModel = _mapper.Map<StreetArtModel>(streetArt);
-			return View(streetArtModel);
+			var streetArtEditModel = _mapper.Map<StreetArtEditModel>(streetArt);
+			return View(streetArtEditModel);
 		}
-
-		// POST: StreetArt/Edit/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit(int id, StreetArtModel streetArtModel)
+		public ActionResult Edit(int id, StreetArtEditModel streetArtEditModel)
 		{
-			StreetArt streetArt = _mapper.Map<StreetArt>(streetArtModel);
+			StreetArt streetArt = streetArtRepository.GetById(id);
+			_mapper.Map<StreetArtEditModel, StreetArt>(streetArtEditModel, streetArt);
+			streetArt.Image = SaveImageAsync(streetArtEditModel).Result;
 			streetArtRepository.Update(streetArt);
 			return RedirectToAction(nameof(Index));
 		}
-
-		// GET: StreetArt/Delete/5
-		public ActionResult Delete(int id)
+		public ActionResult Index()
 		{
-			var streetArtData = streetArtRepository.GetById(id);
-			return View(streetArtData);
+			List<StreetArt> streetArtList = streetArtRepository.GetStreetArtList();
+			return View(streetArtList);
 		}
-
-		// POST: StreetArt/Delete/5
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Delete(int id, StreetArt streetArtData)
+		#region Private Methods
+		#endregion
+		private async Task<string> SaveImageAsync(StreetArtEditModel streetArtModel)
 		{
-			try
+			IFormFile formFile = streetArtModel.Image;
+			Console.WriteLine($"Street Art:{streetArtModel.Id}, Content-Type:{formFile.ContentType}");
+			if (formFile != null && formFile.Length > 0)
 			{
-				return RedirectToAction(nameof(Index));
+				EnsureStreetartUploadDirectoryExists();
+
+				String fileExtension = Path.GetExtension(formFile.FileName);
+				String filename = streetArtModel.Id + fileExtension;
+				String filePath = Path.Combine(this.StreetartUploadDirectory, filename);
+				using (var fileStream = new FileStream(filePath, FileMode.Create))
+				{
+					await formFile.CopyToAsync(fileStream);
+					return filename;
+				}
 			}
-			catch
+			return string.Empty;
+		}
+		private void EnsureStreetartUploadDirectoryExists()
+		{
+			if (!Directory.Exists(StreetartUploadDirectory))
 			{
-				return View(streetArtData);
+				Directory.CreateDirectory(StreetartUploadDirectory);
 			}
 		}
 	}

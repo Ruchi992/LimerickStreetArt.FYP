@@ -11,8 +11,10 @@
 
 	public class UserAccountController : Controller
 	{
+		#region Private Fiedls
 		private readonly IMapper _mapper;
 		private readonly UserAccountRepository userAccountRepository;
+		#endregion
 		public UserAccountController(IConfiguration configuration, IMapper mapper)
 		{
 			var databaseClass = new DatabaseClass
@@ -22,32 +24,12 @@
 			userAccountRepository = new UserAccountRepositoryClass(databaseClass);
 			_mapper = mapper;
 		}
-
-		// GET: UserAccount
-		public ActionResult Index()
-		{
-			List<UserAccount> userAccounts = userAccountRepository.GetUserAccounts();
-			return View(userAccounts);
-		}
-
-		// GET: UserAccount/Details/5
-		public ActionResult Details(int id)
-		{
-			UserAccount userAccount = userAccountRepository.GetById(id);
-
-			var userAccountModel = _mapper.Map<UserAccountModel>(userAccount);
-
-			return View(userAccountModel);
-		}
-
-		// GET: UserAccount/Create
+		#region Public Methods
+		#endregion
 		public ActionResult Create()
 		{
-			//userAccountRepository.Create(userAccount);
 			return View();
 		}
-
-		// POST: UserAccount/Create
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Create(UserAccount userAccount)
@@ -62,66 +44,47 @@
 				return View(userAccount);
 			}
 		}
-
-		// GET: UserAccount/Edit/5
+		public ActionResult Details(int id)
+		{
+			UserAccount userAccount = userAccountRepository.GetById(id);
+			var userAccountModel = _mapper.Map<UserAccountModel>(userAccount);
+			return View(userAccountModel);
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Delete(int id, UserAccountModel userAccountModel)
+		{
+			//try
+			{
+				UserAccount userAccount = userAccountRepository.GetById(id);
+				userAccountRepository.Delete(userAccount);
+				return RedirectToAction(nameof(Index));
+			}
+			//catch
+			{
+				//return View();
+			}
+		}
 		public ActionResult Edit(int id)
 		{
 			UserAccount userAccount = userAccountRepository.GetById(id);
-
 			var userAccountModel = _mapper.Map<UserAccountModel>(userAccount);
-
-
 			return View(userAccountModel);
 		}
-
-		// POST: UserAccount/Edit/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit(int id, UserAccountModel userAccountModel)
 		{
-
 			//UserAccount userAccount = userAccountRepository.GetById(id);
-
 			UserAccount userAccount = _mapper.Map<UserAccount>(userAccountModel);
 
-
-
-			//userAccount.Password = userAccountModel.Password;
-			//userAccount.Username = userAccountModel.Username;
-
-			// TODO: Add update logic here
-
 			userAccountRepository.Update(userAccount);
-
 			return RedirectToAction(nameof(Index));
-
 		}
-
-		// GET: UserAccount/Delete/5
-		public ActionResult Delete(int id)
+		public ActionResult Index()
 		{
-			UserAccount userAccount = userAccountRepository.GetById(id);
-			return View(userAccount);
-		}
-
-		// POST: UserAccount/Delete/5
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult Delete(int id, IFormCollection collection)
-		{
-			try
-			{
-				UserAccount userAccount = userAccountRepository.GetById(id);
-
-				userAccount.Password = collection["Password"];
-				userAccount.Username = collection["Username"];
-
-				return RedirectToAction(nameof(Index));
-			}
-			catch
-			{
-				return View();
-			}
+			List<UserAccount> userAccounts = userAccountRepository.GetUserAccounts();
+			return View(userAccounts);
 		}
 	}
 }

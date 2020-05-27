@@ -5,8 +5,6 @@
 	using LimerickStreetArt.Web.Models;
 	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.Extensions.Configuration;
-	using System;
-	using System.Threading.Tasks;
 
 	public class Login : Controller
 	{
@@ -41,7 +39,7 @@
 				if (userAccount != null)
 				{
 					if (userAccount.Active)
-						return RedirectToAction(nameof(LoggedIn), "Login");
+						return RedirectToAction(nameof(StreetArtController.Index), "StreetArt");
 					else
 					{
 						ModelState.AddModelError("", "Your Account has been locked.  Please contact an Administrator");
