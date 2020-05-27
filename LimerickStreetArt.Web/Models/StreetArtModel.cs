@@ -32,6 +32,6 @@ namespace LimerickStreetArt.Web.Models
 			get;
 			set;
 		}
-		public IFormFile Image { get; set; }
+		public String Image { get; set; }
 	}
 }

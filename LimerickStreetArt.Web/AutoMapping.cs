@@ -7,20 +7,22 @@
 	{
 		public AutoMapping()
 		{
+			//
+			//	UserAccountModel
+			//
 			CreateMap<UserAccountModel, UserAccount>();
 			CreateMap<UserAccount, UserAccountModel>();
-
-			CreateMap<StreetArtModel, StreetArt>()
-				.ForMember(
-				destination => destination.Image,
-				opt => opt.MapFrom(source => source.Image.Name)
-				);
-			//Todo custom mapping fix
+			//
+			//	StreetArtModel
+			//
+			CreateMap<StreetArtModel, StreetArt>();
 			CreateMap<StreetArt, StreetArtModel>();
-			//	.ForMember(
-			//	destination => destination.Image.Name,
-			//	opt => opt.MapFrom(source => source.Image)
-			//	);
+			//
+			//	StreetArtEditModel
+			//
+			CreateMap<StreetArtEditModel, StreetArt>();
+
+			CreateMap<StreetArt, StreetArtEditModel>();
 		}
 	}
 }

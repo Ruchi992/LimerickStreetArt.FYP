@@ -10,30 +10,6 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<form method="post" asp-controller="Index" asp-action="ImageUpload" enctype="multipart/form-data">
-    <div class="form-group row">
-        <label class=" col-sm-2 col-form-label">image</label>
-        <div class="col-sm-10">
-            <div class="custom-file">
-                <input class=" form-control-file-input" type="file" name="file" />
-                <label class="custom-file-label">Browse</label>
-            </div>
-        </div>
-        <button type="submit">Upload</button>
-    </div>
-    <img src="" width="600" height="400" />
-</form>
-<script type="text/javascript">
-    document.ready(function ()
-    {
-        $(".custom-file-input").on("change", function ()
-        {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).next(".custom-file-label").html(fileName);
-        })
-
-    });
-</script>
 <table class="table">
     <thead>
         <tr>

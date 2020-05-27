@@ -12,7 +12,8 @@
 	using System.Collections;
 	using System.Collections.Generic;
 	using System.IO;
-	using static System.Net.Mime.MediaTypeNames;
+    using System.Threading.Tasks;
+    using static System.Net.Mime.MediaTypeNames;
 
 	public class StreetArtController : Controller
 	{
@@ -60,7 +61,6 @@
 			StreetArt streetArt = streetArtRepository.GetById(id);
 
 			var streetArtModel = _mapper.Map<StreetArtModel>(streetArt);
-
 			return View(streetArtModel);
 		}
 		public ActionResult Delete(int id)
@@ -97,27 +97,17 @@
 		{
 			StreetArt streetArt = streetArtRepository.GetById(id);
 
-			var streetArtModel = _mapper.Map<StreetArtModel>(streetArt);
-			return View(streetArtModel);
+			var streetArtEditModel = _mapper.Map<StreetArtEditModel>(streetArt);
+			return View(streetArtEditModel);
 		}
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit(int id, StreetArtModel streetArtModel)
+		public ActionResult Edit(int id, StreetArtEditModel streetArtEditModel)
 		{
 			StreetArt streetArt = streetArtRepository.GetById(id);
-			_mapper.Map<StreetArtModel, StreetArt>(streetArtModel, streetArt);
-			if (streetArtModel.Image != null)
-			{
-				String fileExtension = Path.GetExtension(streetArtModel.Image.FileName);
-				String filename = streetArtModel.Id + fileExtension;
-				streetArt.Image = filename;
-			}
-			else
-			{
-				streetArt.Image = String.Empty;
-			}
+			_mapper.Map<StreetArtEditModel, StreetArt>(streetArtEditModel, streetArt);
+			streetArt.Image = SaveImageAsync(streetArtEditModel).Result;
 			streetArtRepository.Update(streetArt);
-			SaveImage(streetArtModel);
 			return RedirectToAction(nameof(Index));
 		}
 		public ActionResult Index()
@@ -127,7 +117,7 @@
 		}
 		#region Private Methods
 		#endregion
-		private void SaveImage(StreetArtModel streetArtModel)
+		private async Task<string> SaveImageAsync(StreetArtEditModel streetArtModel)
 		{
 			IFormFile formFile = streetArtModel.Image;
 			Console.WriteLine($"Street Art:{streetArtModel.Id}, Content-Type:{formFile.ContentType}");
@@ -140,9 +130,11 @@
 				String filePath = Path.Combine(this.StreetartUploadDirectory, filename);
 				using (var fileStream = new FileStream(filePath, FileMode.Create))
 				{
-					formFile.CopyToAsync(fileStream);
+					await formFile.CopyToAsync(fileStream);
+					return filename;
 				}
 			}
+			return string.Empty;
 		}
 		private void EnsureStreetartUploadDirectoryExists()
 		{
