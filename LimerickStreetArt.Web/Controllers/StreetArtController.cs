@@ -104,13 +104,30 @@
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit(int id, StreetArtEditModel streetArtEditModel)
 		{
-			//TODO: RD if (ModelState.IsValid)
+			if (ModelState.IsValid)
+			{
+				StreetArt streetArt = streetArtRepository.GetById(id);
+				try
+				{
+					_mapper.Map<StreetArtEditModel, StreetArt>(streetArtEditModel, streetArt);
+					streetArt.Image = SaveImageAsync(streetArtEditModel).Result;
+					streetArtRepository.Update(streetArt);
+					return RedirectToAction(nameof(Index));
+				}
+				catch (Exception exception)
+				{
+					ModelState.AddModelError("", $"Failed to Edit {streetArtEditModel.Id}");
+					ModelState.AddModelError("", $"Error: {exception.Message}");
+					return View(streetArt);
+				}
+			}
+			else
+			{
+				ModelState.AddModelError("", $"Model is not valid");
+				return View(streetArtEditModel);
+			}
 
-			StreetArt streetArt = streetArtRepository.GetById(id);
-			_mapper.Map<StreetArtEditModel, StreetArt>(streetArtEditModel, streetArt);
-			streetArt.Image = SaveImageAsync(streetArtEditModel).Result;
-			streetArtRepository.Update(streetArt);
-			return RedirectToAction(nameof(Index));
+
 		}
 		public ActionResult Index()
 		{
