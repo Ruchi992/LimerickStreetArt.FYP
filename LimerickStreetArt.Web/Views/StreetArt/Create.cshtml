@@ -12,15 +12,24 @@
     <div class="col-md-4">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <br />
+            <br />
             <div class="form-group">
                 <label asp-for="GpsLatitude" class="control-label"></label>
                 <input asp-for="GpsLatitude" class="form-control" />
                 <span asp-validation-for="GpsLatitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+
                 <label asp-for="GpsLongitude" class="control-label"></label>
                 <input asp-for="GpsLongitude" class="form-control" />
                 <span asp-validation-for="GpsLongitude" class="text-danger"></span>
+                <input type="button" value="Get From Map" onclick="GetGpsCoordinatesFromMapPoint()" />
             </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -36,13 +45,6 @@
                 <label asp-for="Timestamp" class="control-label"></label>
                 <input asp-for="Timestamp" class="form-control" />
                 <span asp-validation-for="Timestamp" class="text-danger"></span>
-            </div>
-            @* TODO: Add Image upload *@
-            <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="custom-file-input" id="customFile">
-                <label class="custom-file-label" for="customFile">Choose file</label>
-                <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -66,5 +68,15 @@
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
+
+        function GetGpsCoordinatesFromMapPoint()
+        {
+            let gpsLatitudeInputElement = document.getElementById('GpsLatitude');
+            let gpsLongitudeInputElement = document.getElementById('GpsLongitude');
+
+            gpsLatitudeInputElement.value = marker.
+
+
+            }
     </script>
 }
