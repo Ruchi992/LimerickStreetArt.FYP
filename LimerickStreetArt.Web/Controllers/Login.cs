@@ -1,10 +1,12 @@
 ﻿namespace LimerickStreetArt.Web.Controllers
 {
+	using LimerickStreetArt;
 	using LimerickStreetArt.MySQL;
 	using LimerickStreetArt.Repository;
 	using LimerickStreetArt.Web.Models;
 	using Microsoft.AspNetCore.Mvc;
 	using Microsoft.Extensions.Configuration;
+	using System;
 
 	public class Login : Controller
 	{
@@ -39,7 +41,10 @@
 				if (userAccount != null)
 				{
 					if (userAccount.Active)
+					{
+						SettingUserAsLoggedIn(userAccount);
 						return RedirectToAction(nameof(StreetArtController.Index), "StreetArt");
+					}
 					else
 					{
 						ModelState.AddModelError("", "Your Account has been locked.  Please contact an Administrator");
@@ -55,6 +60,11 @@
 				ModelState.AddModelError("", "Invalid user inputs");
 			}
 			return View(model);
+		}
+
+		private void SettingUserAsLoggedIn(UserAccount userAccount)
+		{
+			//	TODO user identify manager or session to save userAccount.Id
 		}
 	}
 
