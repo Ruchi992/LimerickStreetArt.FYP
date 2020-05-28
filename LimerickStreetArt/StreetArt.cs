@@ -29,11 +29,13 @@
 			get;
 			set;
 		}
+		//	TODO: REname to ImageFileName
 		public String Image
 		{
 			get;
 			set;
 		}
+		//	TODO: Rename to AuthorUserAccountId
 		public int UserAccountId
 		{
 			get;
