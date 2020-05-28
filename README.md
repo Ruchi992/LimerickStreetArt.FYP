@@ -13,6 +13,6 @@ Step 4: Clone with GitHub
 
 Step 5: Install SQL script: https://raw.githubusercontent.com/Ruchi992/LimerickStreetArt.FYP/master/LimerickStreetArt.MySQL/assests.sql.setup/streetArt.sql
 
-Navigate to LimerickStreetArt.FYP/LimerickStreet.web
+Step 6: Navigate to LimerickStreetArt.FYP/LimerickStreet.web
 
 Open a command prompt build/run the program with : dotnet run
