@@ -2,6 +2,7 @@
 {
 	using System.Collections.Generic;
 	using AutoMapper;
+	//using LimerickStreetArt.SQLite;
 	using LimerickStreetArt.MySQL;
 	using LimerickStreetArt.Repository;
 	using LimerickStreetArt.Web.Models;
