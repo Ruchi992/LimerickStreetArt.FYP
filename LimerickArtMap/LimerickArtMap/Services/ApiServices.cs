@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using LimerickArtMap.Models;
+using Newtonsoft.Json;
 
 namespace LimerickArtMap.Services
 {
@@ -23,6 +24,8 @@ namespace LimerickArtMap.Services
 			};
 
 
+			var json = new JsonConvert.SerializeObject(model);
+			HttpContent content = new StringContent();
 
 		}
 	}
