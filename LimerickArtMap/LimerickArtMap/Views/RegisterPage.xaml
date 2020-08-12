@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LimerickArtMap.Views.RegisterPage"            
+             xmlns:viewModels="clr-namespace:LimerickArtMap.Views">
+    <ContentPage.BindingContext>
+        <viewModels:RegisterPage/>
+    </ContentPage.BindingContext>
+    <StackLayout Orientation ="Vertical">
+        <Entry Text="{Binding Username}"
+               Placeholder="username"/>
+        <Entry Text="{Binding Password}"
+               Placeholder="password"/>
+        <Entry Text="{Binding DateOfBirth}"
+               Placeholder="dateofirth"/>
+        <Entry Text="{Binding ReconformPassword}"
+               Placeholder="reconformpassword"/>
+        <Entry Text="{Binding Email}"
+               Placeholder="email"/>
+        <Button Command ="{Binding RegisterCommand}"
+                Text="Register here"/>
+
+    </StackLayout>
+               
+ 
+</ContentPage>
