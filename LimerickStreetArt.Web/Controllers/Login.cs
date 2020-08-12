@@ -43,7 +43,10 @@
 					if (userAccount.Active)
 					{
 						SettingUserAsLoggedIn(userAccount);
-						return RedirectToAction(nameof(StreetArtController.Index), "StreetArt");
+						return RedirectToAction(
+							actionName: nameof(StreetArtController.Index),
+							controllerName: "StreetArt"
+							);
 					}
 					else
 					{

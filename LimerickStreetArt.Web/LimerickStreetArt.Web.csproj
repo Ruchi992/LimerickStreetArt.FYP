@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LimerickStreetArt.MySQL\LimerickStreetArt.MySQL.csproj" />
+    <ProjectReference Include="..\LimerickStreetArt.SQLite\LimerickStreetArt.SQLite.csproj" />
     <ProjectReference Include="..\LimerickStreetArt\LimerickStreetArt.csproj" />
   </ItemGroup>
 
