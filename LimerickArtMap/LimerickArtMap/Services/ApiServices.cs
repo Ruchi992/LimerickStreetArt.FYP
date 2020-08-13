@@ -24,8 +24,8 @@ namespace LimerickArtMap.Services
 			};
 
 
-			var json = new JsonConvert.SerializeObject(model);
-			HttpContent content = new StringContent();
+			var jsonObject = new JsonConvert.DeS(model);
+			HttpContent content = new StringContent(jsonObject);
 
 		}
 	}
