@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using LimerickStreetArt.Repository;
+using LimerickStreetArt.MySQL;
 
 namespace LimerickStreetArt.Web
 {
@@ -27,6 +29,17 @@ namespace LimerickStreetArt.Web
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllersWithViews();
+
+			var databaseClass = new DatabaseClass
+			{
+				ConnectionString = Configuration.GetConnectionString("LocalDatabase"),
+			};
+			var streetArtRepository = new StreetArtRepositoryClass(databaseClass);
+			var userAccountRepository = new UserAccountRepositoryClass(databaseClass);
+
+			services.AddSingleton<StreetArtRepository>(streetArtRepository);
+			services.AddSingleton<UserAccountRepository>(userAccountRepository);
+
 			//services.AddAutoMapper(typeof(Startup));
 
 			// Auto Mapper Configurations

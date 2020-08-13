@@ -14,13 +14,10 @@
 		private readonly StreetArtRepository _streetArtRepository;
 		//private readonly ILogger<HomeController> _logger;
 		//ILogger<HomeController> logger,
-		public HomeController(IConfiguration configuration)
+		public HomeController(StreetArtRepository _streetArtRepository)
 		{
-			var databaseClass = new DatabaseClass
-			{
-				ConnectionString = configuration.GetConnectionString("LocalDatabase"),
-			};
-			_streetArtRepository = new StreetArtRepositoryClass(databaseClass);
+
+			this._streetArtRepository = _streetArtRepository;
 
 			///_logger = logger;
 		}
