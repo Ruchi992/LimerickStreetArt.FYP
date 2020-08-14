@@ -1,13 +1,13 @@
 ﻿using LimerickArtMap.Services;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace LimerickArtMap.ViewModels
 {
 	public class RegisterPage
 	{
-		ApiServices _apiservices = new ApiServices();
+		readonly ApiServices _apiservices = new ApiServices();
 		public String Password { get; set; }
 
 		public String ReconformPassword { get; set; }
@@ -16,13 +16,25 @@ namespace LimerickArtMap.ViewModels
 		public String Username { get; set; }
 
 		public DateTime DateOfBirth { get; set; }
-		public Icommand RegisterCommand
+		public String Message { get; set; }
+		public ICommand RegisterCommand
 		{
 			get
 			{
-				return new Command(() =>
+				return new Command(async () =>
 				{
-					_apiservices.RegisterAsync(Email, Username, DateOfBirth, Password, ReconformPassword);
+
+					var isSuccess = await _apiservices.RegisterAsync(Email, Username, DateOfBirth, Password, ReconformPassword);
+
+					if (isSuccess)
+						Message = "Registered successfully";
+
+					else
+					{
+						Message = "Register not success";
+					}
+
+
 				}
 				);
 			}
@@ -31,16 +43,6 @@ namespace LimerickArtMap.ViewModels
 
 
 
-	}
-
-	internal class Command : Icommand
-	{
-		private Action p;
-
-		public Command(Action p)
-		{
-			this.p = p;
-		}
 	}
 }
 

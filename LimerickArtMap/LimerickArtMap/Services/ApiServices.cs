@@ -10,7 +10,7 @@ namespace LimerickArtMap.Services
 {
 	public class ApiServices
 	{
-		public async Task RegisterAsync(string email, string username, DateTime dateOfBirth, string password, string reconformPassword)
+		public async Task<bool> RegisterAsync(string email, string username, DateTime dateOfBirth, string password, string reconformPassword)
 		{
 			var client = new HttpClient();
 			var model = new UserAccount
@@ -24,9 +24,12 @@ namespace LimerickArtMap.Services
 			};
 
 
-			var jsonObject = new JsonConvert.DeS(model);
+			var jsonObject = JsonConvert.SerializeObject(model);
 			HttpContent content = new StringContent(jsonObject);
 
+			var response = await client.PostAsync("https://localhost:44345/api/streetart", content);
+			return response.IsSuccessStatusCode;
 		}
+
 	}
 }
