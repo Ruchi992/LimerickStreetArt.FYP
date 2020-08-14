@@ -12,14 +12,13 @@
 	public class HomeController : Controller
 	{
 		private readonly StreetArtRepository _streetArtRepository;
-		//private readonly ILogger<HomeController> _logger;
-		//ILogger<HomeController> logger,
+
 		public HomeController(StreetArtRepository _streetArtRepository)
 		{
 
 			this._streetArtRepository = _streetArtRepository;
 
-			///_logger = logger;
+
 		}
 
 		public IActionResult Index()
