@@ -11,12 +11,12 @@
 
 	public class HomeController : Controller
 	{
-		private readonly StreetArtRepository _streetArtRepository;
+		private readonly StreetArtRepository streetArtRepository;
 
-		public HomeController(StreetArtRepository _streetArtRepository)
+		public HomeController(StreetArtRepository streetArtRepository)
 		{
 
-			this._streetArtRepository = _streetArtRepository;
+			this.streetArtRepository = streetArtRepository;
 
 
 		}
@@ -27,7 +27,7 @@
 		}
 		public IActionResult ArtMap()
 		{
-			List<StreetArt> streetArtList = _streetArtRepository.GetStreetArtList();
+			List<StreetArt> streetArtList = streetArtRepository.GetStreetArtList();
 			return View(streetArtList);
 		}
 

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Net.Http;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using LimerickArtMap.Models;
+//using LimerickStreetArt.UserAccount;
 using Newtonsoft.Json;
 
 namespace LimerickArtMap.Services

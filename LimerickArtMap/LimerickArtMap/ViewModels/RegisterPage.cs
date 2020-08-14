@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace LimerickArtMap.ViewModels
 {
-	public class RegisterPage
+	public class RegisterPage : BaseViewModel
 	{
 		readonly ApiServices _apiservices = new ApiServices();
 		public String Password { get; set; }
