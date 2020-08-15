@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace LimerickArtMap.ViewModels
+namespace LimerickStreetArt.MobileForms.ViewModels
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DetailPage : ContentPage

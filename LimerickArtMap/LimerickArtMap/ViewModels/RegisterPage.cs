@@ -1,10 +1,13 @@
-﻿using LimerickArtMap.Services;
-using System;
-using System.Windows.Input;
-using Xamarin.Forms;
+﻿
 
-namespace LimerickArtMap.ViewModels
+
+namespace LimerickStreetArt.MobileForms.ViewModels
 {
+	using Models;
+	using System;
+	using System.Windows.Input;
+	using Xamarin.Forms;
+	using Services;
 	public class RegisterPage : BaseViewModel
 	{
 		readonly ApiServices _apiservices = new ApiServices();
@@ -24,7 +27,12 @@ namespace LimerickArtMap.ViewModels
 				return new Command(async () =>
 				{
 
-					var isSuccess = await _apiservices.RegisterAsync(Email, Username, DateOfBirth, Password, ReconformPassword);
+					var isSuccess = await _apiservices.RegisterAsync(
+						email: Email,
+						username: Username,
+						dateOfBirth: DateOfBirth,
+						password: Password,
+						passwordConfirmation: Password);
 
 					if (isSuccess)
 						Message = "Registered successfully";

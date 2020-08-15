@@ -4,8 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="LimerickArtMap.Views.RegisterPage"            
-             xmlns:viewModels="clr-namespace:LimerickArtMap.Views">
+             x:Class="LimerickStreetArt.MobileForms.Views.RegisterPage"            
+             xmlns:viewModels="clr-namespace:LimerickStreetArt.MobileForms.Views">
     <ContentPage.BindingContext>
         <viewModels:RegisterPage/>
     </ContentPage.BindingContext>
@@ -24,6 +24,6 @@
                 Text="Register here"/>
 
     </StackLayout>
-               
- 
+
+
 </ContentPage>

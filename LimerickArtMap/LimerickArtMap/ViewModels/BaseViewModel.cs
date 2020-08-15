@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-using Xamarin.Forms;
-
-using LimerickArtMap.Models;
-using LimerickArtMap.Services;
-
-namespace LimerickArtMap.ViewModels
+﻿namespace LimerickStreetArt.MobileForms.ViewModels
 {
+	using LimerickStreetArt;
+	using Services;
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel;
+	using System.Runtime.CompilerServices;
+
 	public class BaseViewModel : INotifyPropertyChanged
 	{
-		public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+		//public IDataStore<StreetArt> DataStore => DependencyService.Get<IDataStore<StreetArt>>();
+		public IDataStore<StreetArt> DataStore => new MockDataStore();
 
 		bool isBusy = false;
 		public bool IsBusy

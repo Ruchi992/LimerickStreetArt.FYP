@@ -1,15 +1,13 @@
-﻿using System;
-
-using LimerickArtMap.Models;
-
-namespace LimerickArtMap.ViewModels
+﻿namespace LimerickStreetArt.MobileForms.ViewModels
 {
+	using LimerickStreetArt;
+	using Models;
 	public class ItemDetailViewModel : BaseViewModel
 	{
-		public Item Item { get; set; }
-		public ItemDetailViewModel(Item item = null)
+		public StreetArt Item { get; set; }
+		public ItemDetailViewModel(StreetArt item = null)
 		{
-			Title = item?.Text;
+			Title = item?.Title;
 			Item = item;
 		}
 	}

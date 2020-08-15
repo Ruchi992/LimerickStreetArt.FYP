@@ -17,11 +17,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimerickStreetArt.Web", "Li
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5A7C84AC-44C4-4DC0-B9CA-5B6C239918FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickArtMap.Android", "LimerickArtMap\LimerickArtMap.Android\LimerickArtMap.Android.csproj", "{D3D28BD9-9F98-494E-A5D4-53801D413055}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickStreetArt.AndroidApp", "LimerickArtMap\LimerickArtMap.Android\LimerickStreetArt.AndroidApp.csproj", "{D3D28BD9-9F98-494E-A5D4-53801D413055}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F5398C35-3BD8-4CE6-AA5C-93F084F0EAE3} = {F5398C35-3BD8-4CE6-AA5C-93F084F0EAE3}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickArtMap.iOS", "LimerickArtMap\LimerickArtMap.iOS\LimerickArtMap.iOS.csproj", "{8763AC3D-0372-446D-A9EB-10336534A067}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickStreetArt.iOSApp", "LimerickArtMap\LimerickArtMap.iOS\LimerickStreetArt.iOSApp.csproj", "{8763AC3D-0372-446D-A9EB-10336534A067}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimerickArtMap", "LimerickArtMap\LimerickArtMap\LimerickArtMap.csproj", "{F5398C35-3BD8-4CE6-AA5C-93F084F0EAE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimerickStreetArt.MobileForms", "LimerickArtMap\LimerickArtMap\LimerickStreetArt.MobileForms.csproj", "{F5398C35-3BD8-4CE6-AA5C-93F084F0EAE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

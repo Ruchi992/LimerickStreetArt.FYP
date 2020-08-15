@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-using LimerickArtMap.Models;
-using LimerickArtMap.Views;
-using LimerickArtMap.ViewModels;
-
-namespace LimerickArtMap.Views
+﻿
+namespace LimerickStreetArt.MobileForms.Views
 {
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel;
+	using System.Linq;
+	using System.Text;
+	using System.Threading.Tasks;
+	using Xamarin.Forms;
+	using Xamarin.Forms.Xaml;
+	using Models;
+	using Views;
+	using ViewModels;
+	using LimerickStreetArt;
+
 	// Learn more about making custom code visible in the Xamarin.Forms previewer
 	// by visiting https://aka.ms/xamarinforms-previewer
 	[DesignTimeVisible(false)]
@@ -29,7 +30,7 @@ namespace LimerickArtMap.Views
 
 		async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
 		{
-			var item = args.SelectedItem as Item;
+			var item = args.SelectedItem as StreetArt;
 			if (item == null)
 				return;
 

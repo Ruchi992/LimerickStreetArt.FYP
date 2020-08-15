@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LimerickArtMap.Models
+namespace LimerickStreetArt.MobileForms.Models
 {
 	public enum MenuItemType
 	{

@@ -4,11 +4,15 @@
             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
-            xmlns:views="clr-namespace:LimerickArtMap.Views"
-            x:Class="LimerickArtMap.Views.MainPage">
+            xmlns:Views="clr-namespace:LimerickStreetArt.MobileForms.Views"
+            x:Class="LimerickStreetArt.MobileForms.Views.MainPage">
+
+    <d:MasterDetailPage.Master>
+        <Views:RegisterPage/>
+    </d:MasterDetailPage.Master>
 
     <MasterDetailPage.Master>
-        <views:MenuPage />
+        <Views:MenuPage />
     </MasterDetailPage.Master>
 
     <MasterDetailPage.Detail>
@@ -19,9 +23,9 @@
                 </OnPlatform>
             </NavigationPage.Icon>
             <x:Arguments>
-                <views:ItemsPage />
+                <Views:ItemsPage />
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>
-    
+
 </MasterDetailPage>

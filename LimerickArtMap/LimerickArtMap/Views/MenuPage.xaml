@@ -4,9 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="LimerickArtMap.Views.MenuPage"
+             x:Class="LimerickStreetArt.MobileForms.Views.MenuPage"
              Title="Menu">
-             
+
     <StackLayout VerticalOptions="FillAndExpand">
         <ListView x:Name="ListViewMenu"
                     HasUnevenRows="True">

@@ -1,13 +1,10 @@
-﻿using System;
-using System.ComponentModel;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-using LimerickArtMap.Models;
-using LimerickArtMap.ViewModels;
-
-namespace LimerickArtMap.Views
+﻿namespace LimerickStreetArt.MobileForms.Views
 {
+	using LimerickStreetArt;
+	using Models;
+	using System.ComponentModel;
+	using ViewModels;
+	using Xamarin.Forms;
 	// Learn more about making custom code visible in the Xamarin.Forms previewer
 	// by visiting https://aka.ms/xamarinforms-previewer
 	[DesignTimeVisible(false)]
@@ -26,10 +23,10 @@ namespace LimerickArtMap.Views
 		{
 			InitializeComponent();
 
-			var item = new Item
+			var item = new StreetArt
 			{
-				Text = "Item 1",
-				Description = "This is an item description."
+				Title = "Item 1",
+				Street = "This is an item description."
 			};
 
 			viewModel = new ItemDetailViewModel(item);

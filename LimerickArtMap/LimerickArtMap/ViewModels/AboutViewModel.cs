@@ -3,7 +3,7 @@ using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace LimerickArtMap.ViewModels
+namespace LimerickStreetArt.MobileForms.ViewModels
 {
 	public class AboutViewModel : BaseViewModel
 	{

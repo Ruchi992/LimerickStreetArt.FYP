@@ -1,51 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Xamarin.Essentials;
-using LimerickArtMap.Models;
-
-namespace LimerickArtMap.Services
+﻿namespace LimerickStreetArt.MobileForms.Services
 {
-	public class AzureDataStore : IDataStore<Item>
+	using Newtonsoft.Json;
+	using System;
+	using System.Collections.Generic;
+	using System.Net.Http;
+	using System.Text;
+	using System.Threading.Tasks;
+	using Xamarin.Essentials;
+	public class AzureDataStore : IDataStore<StreetArt>
 	{
-		HttpClient client;
-		IEnumerable<Item> items;
+		readonly HttpClient client;
+		IEnumerable<StreetArt> items;
 
 		public AzureDataStore()
 		{
-			client = new HttpClient();
-			client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
+			client = new HttpClient
+			{
+				BaseAddress = new Uri($"{App.AzureBackendUrl}/")
+			};
 
-			items = new List<Item>();
+			items = new List<StreetArt>();
 		}
 
 		bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
-		public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+		public async Task<IEnumerable<StreetArt>> GetItemsAsync(bool forceRefresh = false)
 		{
 			if (forceRefresh && IsConnected)
 			{
 				var json = await client.GetStringAsync($"api/item");
-				items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Item>>(json));
+				items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<StreetArt>>(json));
 			}
 
 			return items;
 		}
 
-		public async Task<Item> GetItemAsync(string id)
+		public async Task<StreetArt> GetItemAsync(string id)
 		{
 			if (id != null && IsConnected)
 			{
 				var json = await client.GetStringAsync($"api/item/{id}");
-				return await Task.Run(() => JsonConvert.DeserializeObject<Item>(json));
+				return await Task.Run(() => JsonConvert.DeserializeObject<StreetArt>(json));
 			}
 
 			return null;
 		}
 
-		public async Task<bool> AddItemAsync(Item item)
+		public async Task<bool> AddItemAsync(StreetArt item)
 		{
 			if (item == null || !IsConnected)
 				return false;
@@ -57,9 +57,9 @@ namespace LimerickArtMap.Services
 			return response.IsSuccessStatusCode;
 		}
 
-		public async Task<bool> UpdateItemAsync(Item item)
+		public async Task<bool> UpdateItemAsync(StreetArt item)
 		{
-			if (item == null || item.Id == null || !IsConnected)
+			if (item == null || item.Id == 0 || !IsConnected)
 				return false;
 
 			var serializedItem = JsonConvert.SerializeObject(item);

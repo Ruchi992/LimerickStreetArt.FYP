@@ -1,12 +1,16 @@
-﻿using System;
-using Xamarin.Essentials;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using LimerickArtMap.Services;
-using LimerickArtMap.Views;
-
-namespace LimerickArtMap
+﻿
+namespace LimerickStreetArt.MobileForms
 {
+	using System;
+	using Xamarin.Essentials;
+	using Xamarin.Forms;
+	using Xamarin.Forms.Xaml;
+	using Models;
+	using Views;
+	using Services;
+	using ViewModels;
+
+
 	public partial class App : Application
 	{
 		//TODO: Replace with *.azurewebsites.net url after deploying backend to Azure

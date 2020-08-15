@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="LimerickArtMap.Views.ItemsPage"
+             x:Class="LimerickStreetArt.MobileForms.Views.ItemsPage"
              Title="{Binding Title}"
              x:Name="BrowseItemsPage">
 
@@ -24,11 +24,11 @@
                 ItemSelected="OnItemSelected">
             <d:ListView.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
-                    <x:String>First Item</x:String>
-                    <x:String>Second Item</x:String>
-                    <x:String>Third Item</x:String>
-                    <x:String>Fourth Item</x:String>
-                    <x:String>Fifth Item</x:String>
+                    <x:String>LoginPage</x:String>
+                    <x:String>RegisterPage</x:String>
+                    <x:String>Location</x:String>
+                    <x:String>Search Location</x:String>
+                    <x:String>Add photos</x:String>
                     <x:String>Sixth Item</x:String>
                 </x:Array>
             </d:ListView.ItemsSource>
@@ -52,5 +52,5 @@
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-    
+
 </ContentPage>

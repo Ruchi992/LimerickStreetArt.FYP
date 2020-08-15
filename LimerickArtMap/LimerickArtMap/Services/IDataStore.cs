@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LimerickArtMap.Services
+namespace LimerickStreetArt.MobileForms.Services
 {
 	public interface IDataStore<T>
 	{

@@ -1,28 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-using LimerickArtMap.Models;
-
-namespace LimerickArtMap.Views
+﻿namespace LimerickStreetArt.MobileForms.Views
 {
+	using LimerickStreetArt;
+	using Models;
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel;
+	using Xamarin.Forms;
+	using Xamarin.Forms.Xaml;
 	// Learn more about making custom code visible in the Xamarin.Forms previewer
 	// by visiting https://aka.ms/xamarinforms-previewer
 	[DesignTimeVisible(false)]
 	public partial class NewItemPage : ContentPage
 	{
-		public Item Item { get; set; }
+		public StreetArt Item { get; set; }
 
 		public NewItemPage()
 		{
 			InitializeComponent();
 
-			Item = new Item
+			Item = new StreetArt
 			{
-				Text = "Item name",
-				Description = "This is an item description."
+				Title = "Item name",
+				Street = "This is an item description."
 			};
 
 			BindingContext = this;
