@@ -87,8 +87,12 @@
     <AndroidResource Include="Resources\drawable\xamarin_logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\LimerickStreetArt\LimerickStreetArt.csproj">
+      <Project>{ca0fb6c0-c210-4348-9d43-89fde4daeb80}</Project>
+      <Name>LimerickStreetArt</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LimerickArtMap\LimerickArtMap.csproj">
-      <Project>{0984D89D-2E73-4A80-B437-CF9EA9EA0136}</Project>
+      <Project>{f5398c35-3bd8-4ce6-aa5c-93f084f0eae3}</Project>
       <Name>LimerickArtMap</Name>
     </ProjectReference>
   </ItemGroup>
