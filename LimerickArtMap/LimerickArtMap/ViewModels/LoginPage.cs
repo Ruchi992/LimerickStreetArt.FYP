@@ -7,7 +7,7 @@
 	public class LoginPage
 	{
 
-		private readonly ApiServices _apiServices = new ApiServices();
+		private readonly ApiServices _apiServices = ApiServiceFactory.GetApiServices();
 		public String Password { get; set; }
 
 		public Boolean RememberMe { get; set; }

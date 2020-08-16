@@ -7,7 +7,7 @@
 	using Services;
 	public class RegisterPage : Page
 	{
-		readonly ApiServices _apiservices = new ApiServices();
+		readonly ApiServices _apiservices = ApiServiceFactory.GetApiServices();
 		public String Password { get; set; }
 
 		public String ReconformPassword { get; set; }

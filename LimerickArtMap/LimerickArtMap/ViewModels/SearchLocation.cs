@@ -11,7 +11,7 @@ namespace LimerickStreetArt.MobileForms.ViewModels
 {
 	public class SearchLocation
 	{
-		private readonly ApiServices _apiServices = new ApiServices();
+		private readonly ApiServices _apiServices = ApiServiceFactory.GetApiServices();
 		private List<StreetArt> streetart;
 
 		public List<StreetArt> StreetArt
