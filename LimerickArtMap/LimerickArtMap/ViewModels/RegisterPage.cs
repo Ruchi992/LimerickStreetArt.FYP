@@ -1,14 +1,11 @@
-﻿
-
-
-namespace LimerickStreetArt.MobileForms.ViewModels
+﻿namespace LimerickStreetArt.MobileForms.ViewModels
 {
 	using Models;
 	using System;
 	using System.Windows.Input;
 	using Xamarin.Forms;
 	using Services;
-	public class RegisterPage
+	public class RegisterPage : Page
 	{
 		readonly ApiServices _apiservices = new ApiServices();
 		public String Password { get; set; }

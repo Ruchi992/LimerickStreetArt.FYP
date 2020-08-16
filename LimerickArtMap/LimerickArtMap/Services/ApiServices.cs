@@ -1,16 +1,18 @@
-﻿using System;
+﻿//using LimerickStreetArt.UserAccount;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using LimerickStreetArt;
-//using LimerickStreetArt.UserAccount;
-using Newtonsoft.Json;
 
 namespace LimerickStreetArt.MobileForms.Services
 {
 	public class ApiServices
 	{
+		public object Constants { get; private set; }
+
 		public async Task<bool> RegisterAsync(
 			string email,
 			string username,
@@ -31,7 +33,7 @@ namespace LimerickStreetArt.MobileForms.Services
 			var jsonObject = JsonConvert.SerializeObject(model);
 			HttpContent content = new StringContent(jsonObject);
 
-			var response = await client.PostAsync("https://localhost:44345/api/streetart", content);
+			var response = await client.PostAsync(AppUrls.streatArt, content);
 			return response.IsSuccessStatusCode;
 		}
 		public async Task LoginAsync(string Username, string Password)
@@ -41,12 +43,25 @@ namespace LimerickStreetArt.MobileForms.Services
 			 new KeyValuePair<string, string>(Username,Username),
 			 new KeyValuePair<string,string>(Password,Password),
 		 };
-			var request = new HttpRequestMessage(HttpMethod.Post, "url");
-			request.Content = new FormUrlEncodedContent(keyValues);
+			var request = new HttpRequestMessage(HttpMethod.Post, AppUrls.login)
+			{
+				Content = new FormUrlEncodedContent(keyValues)
+			};
 			var client = new HttpClient();
 			var response = await client.SendAsync(request);
 			Debug.WriteLine(await response.Content.ReadAsStringAsync());
 		}
+		public async Task<List<StreetArt>> SearchLocationAsync(string keyword, string accessToken)
+		{
+			var client = new HttpClient();
+			//client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearing", accessToken);
+			var url = AppUrls.streatArtSearch + keyword;
+			var json = await client.GetStringAsync(url);
 
+
+			var streetArts = JsonConvert.DeserializeObject<List<StreetArt>>(json);
+
+			return streetArts;
+		}
 	}
 }
