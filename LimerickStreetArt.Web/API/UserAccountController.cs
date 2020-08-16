@@ -1,12 +1,11 @@
-﻿using LimerickStreetArt.Repository;
-using LimerickStreetArt.Web.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-
-namespace LimerickStreetArt.Web.API
+﻿namespace LimerickStreetArt.Web.API
 {
+	using LimerickStreetArt.Repository;
+	using LimerickStreetArt.Web.Models;
+	using Microsoft.AspNetCore.Http;
+	using Microsoft.AspNetCore.Mvc;
+	using System;
+	using System.Collections.Generic;
 	[Route("api/[controller]")]
 	[ApiController]
 	public class UserAccountController : ControllerBase
@@ -17,9 +16,9 @@ namespace LimerickStreetArt.Web.API
 		{
 			UserAccountRepository = userAccountRepository;
 		}
-		[HttpGet]
+		[HttpGet(Name = nameof(GetUserAccounts))]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public ActionResult<IEnumerable<UserAccount>> Get()
+		public ActionResult<IEnumerable<UserAccount>> GetUserAccounts()
 		{
 			return Ok(UserAccountRepository.GetUserAccounts());
 		}
@@ -43,7 +42,7 @@ namespace LimerickStreetArt.Web.API
 		public ActionResult<UserAccount> Create([FromBody]UserAccount item)
 		{
 			UserAccountRepository.Create(item);
-			return CreatedAtAction(nameof(Get), new { item.Id }, item);
+			return CreatedAtAction(nameof(GetUserAccounts), new { item.Id }, item);
 		}
 
 		[HttpPut]
