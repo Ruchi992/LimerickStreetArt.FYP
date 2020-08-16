@@ -22,6 +22,8 @@
                Placeholder="email"/>
         <Button Command ="{Binding RegisterCommand}"
                 Text="Register here"/>
+        <Label Text="{Binding Message}"/>
+        <Button Text="Go to the login page"/>
 
     </StackLayout>
 

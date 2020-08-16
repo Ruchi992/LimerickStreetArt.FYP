@@ -8,7 +8,7 @@ namespace LimerickStreetArt.MobileForms.ViewModels
 	using System.Windows.Input;
 	using Xamarin.Forms;
 	using Services;
-	public class RegisterPage : BaseViewModel
+	public class RegisterPage
 	{
 		readonly ApiServices _apiservices = new ApiServices();
 		public String Password { get; set; }

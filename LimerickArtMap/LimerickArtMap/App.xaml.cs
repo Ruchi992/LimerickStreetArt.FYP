@@ -9,7 +9,7 @@ namespace LimerickStreetArt.MobileForms
 	using Views;
 	using Services;
 	using ViewModels;
-
+	using RegisterPage = ViewModels.RegisterPage;
 
 	public partial class App : Application
 	{
@@ -28,7 +28,7 @@ namespace LimerickStreetArt.MobileForms
 				DependencyService.Register<MockDataStore>();
 			else
 				DependencyService.Register<AzureDataStore>();
-			MainPage = new MainPage();
+			MainPage = new RegisterPage();
 		}
 
 		protected override void OnStart()
