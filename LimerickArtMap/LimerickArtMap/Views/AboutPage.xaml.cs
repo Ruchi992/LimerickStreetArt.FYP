@@ -3,7 +3,7 @@ using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace test1.Views
+namespace LimerickStreetArt.MobileForms.ViewModels
 {
 	// Learn more about making custom code visible in the Xamarin.Forms previewer
 	// by visiting https://aka.ms/xamarinforms-previewer
@@ -13,6 +13,11 @@ namespace test1.Views
 		public AboutPage()
 		{
 			InitializeComponent();
+		}
+
+		private void InitializeComponent()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

@@ -5,7 +5,7 @@ namespace LimerickStreetArt.Web.API
 {
 	[Route("/")]
 	[ApiController]
-	public class RootController : Controller
+	public class RootController : ControllerBase
 	{
 		[HttpGet(Name = nameof(Index))]
 		public IActionResult Index()

@@ -24,7 +24,7 @@ namespace LimerickStreetArt.Web.API
 			return Ok("You have reached User Registration.");
 		}
 
-		[HttpPost]
+		[HttpPatch]
 		[ProducesResponseType(StatusCodes.Status201Created)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		public ActionResult<bool> Register([FromBody]RegistrationModel registrationModel)
