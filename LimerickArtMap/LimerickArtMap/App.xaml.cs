@@ -28,7 +28,7 @@ namespace LimerickStreetArt.MobileForms
 				DependencyService.Register<MockDataStore>();
 			else
 				DependencyService.Register<AzureDataStore>();
-			MainPage = new MainPage();
+			MainPage = new RegisterPage();
 		}
 
 		protected override void OnStart()

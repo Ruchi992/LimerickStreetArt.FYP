@@ -33,11 +33,9 @@ namespace LimerickStreetArt.MobileForms.Views
 				switch (id)
 				{
 					case (int)MenuItemType.Search:
-						MenuPages.Add(id, new NavigationPage(new ItemsPage()));
+						MenuPages.Add(id, new NavigationPage(new RegisterPage()));
 						break;
-					case (int)MenuItemType.About:
-						MenuPages.Add(id, new NavigationPage(new AboutPage()));
-						break;
+
 				}
 			}
 

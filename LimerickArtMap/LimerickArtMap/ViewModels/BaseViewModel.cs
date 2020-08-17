@@ -1,16 +1,18 @@
 ﻿namespace LimerickStreetArt.MobileForms.ViewModels
+
 {
-	using LimerickStreetArt;
-	using Services;
+	using LimerickStreetArt.MobileForms.Services;
 	using System;
 	using System.Collections.Generic;
 	using System.ComponentModel;
 	using System.Runtime.CompilerServices;
+	using ViewModels;
+	using ViewModels;
 
+	using Xamarin.Forms;
 	public class BaseViewModel : INotifyPropertyChanged
 	{
-		//public IDataStore<StreetArt> DataStore => DependencyService.Get<IDataStore<StreetArt>>();
-		public IDataStore<StreetArt> DataStore => new MockDataStore();
+		public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 
 		bool isBusy = false;
 		public bool IsBusy
@@ -50,5 +52,12 @@
 			changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 		#endregion
+	}
+
+	public class Item
+	{
+		internal string Description;
+
+		public string Text { get; internal set; }
 	}
 }

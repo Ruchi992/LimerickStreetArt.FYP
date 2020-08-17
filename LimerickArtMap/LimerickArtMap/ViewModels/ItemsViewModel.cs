@@ -1,29 +1,30 @@
-﻿namespace LimerickStreetArt.MobileForms.ViewModels
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+
+
+namespace LimerickStreetArt.MobileForms.ViewModels
 {
 	using Models;
-	using System;
-	using System.Collections.ObjectModel;
-	using System.Diagnostics;
-	using System.Threading.Tasks;
-	using Xamarin.Forms;
 	using Views;
-	using LimerickStreetArt;
-
 	public class ItemsViewModel : BaseViewModel
 	{
-		public ObservableCollection<StreetArt> streetArts { get; set; }
+		public ObservableCollection<Item> Items { get; set; }
 		public Command LoadItemsCommand { get; set; }
 
 		public ItemsViewModel()
 		{
 			Title = "Browse";
-			streetArts = new ObservableCollection<StreetArt>();
+			Items = new ObservableCollection<Item>();
 			LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-			MessagingCenter.Subscribe<NewItemPage, StreetArt>(this, "AddStreetart", async (obj, item) =>
+			MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
 			{
-				var newItem = item as StreetArt;
-				streetArts.Add(newItem);
+				var newItem = item as Item;
+				Items.Add(newItem);
 				await DataStore.AddItemAsync(newItem);
 			});
 		}
@@ -37,11 +38,11 @@
 
 			try
 			{
-				streetArts.Clear();
+				Items.Clear();
 				var items = await DataStore.GetItemsAsync(true);
 				foreach (var item in items)
 				{
-					streetArts.Add(item);
+					Items.Add(item);
 				}
 			}
 			catch (Exception ex)

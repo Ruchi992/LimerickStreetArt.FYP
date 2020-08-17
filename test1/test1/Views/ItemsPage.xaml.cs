@@ -1,19 +1,18 @@
-﻿
-namespace LimerickStreetArt.MobileForms.Views
-{
-	using System;
-	using System.Collections.Generic;
-	using System.ComponentModel;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
-	using Xamarin.Forms;
-	using Xamarin.Forms.Xaml;
-	using Models;
-	using Views;
-	using ViewModels;
-	using LimerickStreetArt;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
+using test1.Models;
+using test1.Views;
+using test1.ViewModels;
+
+namespace test1.Views
+{
 	// Learn more about making custom code visible in the Xamarin.Forms previewer
 	// by visiting https://aka.ms/xamarinforms-previewer
 	[DesignTimeVisible(false)]
@@ -30,11 +29,11 @@ namespace LimerickStreetArt.MobileForms.Views
 
 		async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
 		{
-			var streetArt = args.SelectedItem as StreetArt;
-			if (streetArt == null)
+			var item = args.SelectedItem as Item;
+			if (item == null)
 				return;
 
-			await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(streetArt)));
+			await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
 
 			// Manually deselect item.
 			ItemsListView.SelectedItem = null;
@@ -49,7 +48,7 @@ namespace LimerickStreetArt.MobileForms.Views
 		{
 			base.OnAppearing();
 
-			if (viewModel.streetArts.Count == 0)
+			if (viewModel.Items.Count == 0)
 				viewModel.LoadItemsCommand.Execute(null);
 		}
 	}

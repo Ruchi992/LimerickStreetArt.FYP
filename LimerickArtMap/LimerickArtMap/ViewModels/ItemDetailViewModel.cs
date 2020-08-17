@@ -1,13 +1,16 @@
-﻿namespace LimerickStreetArt.MobileForms.ViewModels
+﻿
+
+
+namespace LimerickStreetArt.MobileForms.ViewModels
 {
-	using LimerickStreetArt;
+	using System;
 	using Models;
 	public class ItemDetailViewModel : BaseViewModel
 	{
-		public StreetArt Item { get; set; }
-		public ItemDetailViewModel(StreetArt item = null)
+		public Item Item { get; set; }
+		public ItemDetailViewModel(Item item = null)
 		{
-			Title = item?.Title;
+			Title = item?.Text;
 			Item = item;
 		}
 	}
