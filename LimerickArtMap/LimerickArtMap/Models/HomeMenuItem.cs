@@ -6,7 +6,7 @@ namespace LimerickStreetArt.MobileForms.Models
 {
 	public enum MenuItemType
 	{
-		Browse,
+		Search,
 		About
 	}
 	public class HomeMenuItem

@@ -11,19 +11,19 @@
 
 	public class ItemsViewModel : BaseViewModel
 	{
-		public ObservableCollection<StreetArt> Items { get; set; }
+		public ObservableCollection<StreetArt> streetArts { get; set; }
 		public Command LoadItemsCommand { get; set; }
 
 		public ItemsViewModel()
 		{
 			Title = "Browse";
-			Items = new ObservableCollection<StreetArt>();
+			streetArts = new ObservableCollection<StreetArt>();
 			LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-			MessagingCenter.Subscribe<NewItemPage, StreetArt>(this, "AddItem", async (obj, item) =>
+			MessagingCenter.Subscribe<NewItemPage, StreetArt>(this, "AddStreetart", async (obj, item) =>
 			{
 				var newItem = item as StreetArt;
-				Items.Add(newItem);
+				streetArts.Add(newItem);
 				await DataStore.AddItemAsync(newItem);
 			});
 		}
@@ -37,11 +37,11 @@
 
 			try
 			{
-				Items.Clear();
+				streetArts.Clear();
 				var items = await DataStore.GetItemsAsync(true);
 				foreach (var item in items)
 				{
-					Items.Add(item);
+					streetArts.Add(item);
 				}
 			}
 			catch (Exception ex)

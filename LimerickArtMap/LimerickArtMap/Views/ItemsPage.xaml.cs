@@ -30,11 +30,11 @@ namespace LimerickStreetArt.MobileForms.Views
 
 		async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
 		{
-			var item = args.SelectedItem as StreetArt;
-			if (item == null)
+			var streetArt = args.SelectedItem as StreetArt;
+			if (streetArt == null)
 				return;
 
-			await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+			await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(streetArt)));
 
 			// Manually deselect item.
 			ItemsListView.SelectedItem = null;
@@ -49,7 +49,7 @@ namespace LimerickStreetArt.MobileForms.Views
 		{
 			base.OnAppearing();
 
-			if (viewModel.Items.Count == 0)
+			if (viewModel.streetArts.Count == 0)
 				viewModel.LoadItemsCommand.Execute(null);
 		}
 	}

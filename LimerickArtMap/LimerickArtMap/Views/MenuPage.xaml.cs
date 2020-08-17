@@ -20,7 +20,7 @@ namespace LimerickStreetArt.MobileForms.Views
 
 			menuItems = new List<HomeMenuItem>
 			{
-				new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
+				new HomeMenuItem {Id = MenuItemType.Search, Title="Search" },
 				new HomeMenuItem {Id = MenuItemType.About, Title="About" }
 			};
 
