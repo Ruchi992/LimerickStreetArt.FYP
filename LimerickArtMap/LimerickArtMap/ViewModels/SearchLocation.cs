@@ -32,7 +32,7 @@ namespace LimerickStreetArt.MobileForms.ViewModels
 			{
 				return new Command(async () =>
 				{
-					StreetArt = await _apiServices.SearchLocationAsync(Keyword, "");
+					//StreetArt = await _apiServices.SearchLocationAsync(Keyword, "");
 				});
 			}
 		}

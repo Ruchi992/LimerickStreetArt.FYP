@@ -12,13 +12,13 @@
 	[DesignTimeVisible(false)]
 	public partial class NewItemPage : ContentPage
 	{
-		public StreetArt Item { get; set; }
+		public LimerickStreetArt.StreetArt Item { get; set; }
 
 		public NewItemPage()
 		{
 			InitializeComponent();
 
-			Item = new StreetArt
+			Item = new LimerickStreetArt.StreetArt
 			{
 				Title = "Item name",
 				Street = "This is an item description."

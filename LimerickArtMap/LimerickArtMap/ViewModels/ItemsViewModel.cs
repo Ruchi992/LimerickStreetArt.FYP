@@ -12,18 +12,18 @@ namespace LimerickStreetArt.MobileForms.ViewModels
 	using Views;
 	public class ItemsViewModel : BaseViewModel
 	{
-		public ObservableCollection<Item> Items { get; set; }
+		public ObservableCollection<StreetArt> Items { get; set; }
 		public Command LoadItemsCommand { get; set; }
 
 		public ItemsViewModel()
 		{
 			Title = "Browse";
-			Items = new ObservableCollection<Item>();
+			Items = new ObservableCollection<StreetArt>();
 			LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-			MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
+			MessagingCenter.Subscribe<NewItemPage, StreetArt>(this, "AddItem", async (obj, item) =>
 			{
-				var newItem = item as Item;
+				var newItem = item as StreetArt;
 				Items.Add(newItem);
 				await DataStore.AddItemAsync(newItem);
 			});

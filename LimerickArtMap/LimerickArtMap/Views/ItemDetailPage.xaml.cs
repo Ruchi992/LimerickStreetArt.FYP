@@ -30,10 +30,10 @@ namespace LimerickStreetArt.MobileForms.ViewModels
 		{
 			InitializeComponent();
 
-			var item = new Item
+			var item = new StreetArt
 			{
 				Text = "Item 1",
-				Description = "This is an item description."
+				Title = "This is an item description."
 			};
 
 			viewModel = new ItemDetailViewModel(item);

@@ -12,7 +12,7 @@
 	using Xamarin.Forms;
 	public class BaseViewModel : INotifyPropertyChanged
 	{
-		public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+		public IDataStore<StreetArt> DataStore => DependencyService.Get<IDataStore<StreetArt>>();
 
 		bool isBusy = false;
 		public bool IsBusy
@@ -54,10 +54,11 @@
 		#endregion
 	}
 
-	public class Item
+	public class StreetArt
 	{
-		internal string Description;
+		internal string Text;
 
-		public string Text { get; internal set; }
+		public string street { get; internal set; }
+		public string Title { get; internal set; }
 	}
 }

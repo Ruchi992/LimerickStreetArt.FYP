@@ -6,8 +6,6 @@
             mc:Ignorable="d"
             xmlns:Views="clr-namespace:LimerickStreetArt.MobileForms.Views"
             x:Class="LimerickStreetArt.MobileForms.Views.MainPage">
-
-
     <d:MasterDetailPage.Master>
         <Views:RegisterPage/>
     </d:MasterDetailPage.Master>
