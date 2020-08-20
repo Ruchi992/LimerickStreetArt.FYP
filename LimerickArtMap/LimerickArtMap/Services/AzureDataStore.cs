@@ -16,7 +16,7 @@
 		{
 			client = new HttpClient
 			{
-				BaseAddress = new Uri($"{App.AzureBackendUrl}/")
+				//BaseAddress = new Uri($"{App.AzureBackendUrl}/")
 			};
 
 			items = new List<StreetArt>();

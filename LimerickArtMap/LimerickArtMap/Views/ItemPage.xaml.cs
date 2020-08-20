@@ -10,11 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace LimerickStreetArt.MobileForms.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AboutPage : ContentPage
+	public partial class ItemPage : ContentPage
 	{
-		public AboutPage()
+		public ItemPage()
 		{
-
+			InitializeComponent();
 		}
 	}
 }

@@ -1,60 +1,85 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
 using LimerickStreetArtApp.Models;
+using MenuItem = LimerickStreetArtApp.Models.MenuItem;
+using System.Collections.ObjectModel;
 
 namespace LimerickStreetArtApp.Views
 {
-	// Learn more about making custom code visible in the Xamarin.Forms previewer
-
-	// by visiting https://aka.ms/xamarinforms-previewer
-	[DesignTimeVisible(false)]
+	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainPage : MasterDetailPage
 	{
-		Dictionary<int, NavigationPage> MenuPages = new Dictionary<int, NavigationPage>();
+		//public ObservableCollection<navigationList> navigationList { get { return navigationList; } }
+
+		//private  object navigationList;
+		List<MenuItems> MenuItems;
+
+		//private object navigationList;
+
 		public MainPage()
 		{
+
 			InitializeComponent();
 
-			MasterBehavior = MasterBehavior.Popover;
+			MenuItems = new List<MenuItems>();
 
-			MenuPages.Add((int)MenuItemType.Search, (NavigationPage)Detail);
-			MenuPages.Add((int)MenuItemType.Login, (NavigationPage)Detail);
+			MenuItems.Add(new MenuItems { OptionName = "Browse Products" });
+			MenuItems.Add(new MenuItems { OptionName = "Your orders" });
+			MenuItems.Add(new MenuItems { OptionName = "Categories" });
+			MenuItems.Add(new MenuItems { OptionName = "Profile" });
+			MenuItems.Add(new MenuItems { OptionName = "Settings" });
+			MenuItems.Add(new MenuItems { OptionName = "Logout" });
+
+			//navigationList.ItemSource = MenuItems;
+
+			Detail = new NavigationPage(new BrowseProducts());
 		}
 
-		public async Task NavigateFromMenu(int id)
+		public object navigationList { get; private set; }
+
+		private void Item_Tapped(object sender, ItemTappedEventArgs e)
 		{
-			if (!MenuPages.ContainsKey(id))
+			try
 			{
-				switch (id)
+				var item = e.Item as MenuItems;
+
+				switch (item.OptionName)
 				{
-					case (int)MenuItemType.Search:
-						MenuPages.Add(id, new NavigationPage(new ItemsPage()));
+					case "Browse Products":
+						{
+							Detail = new NavigationPage(new BrowseProducts());
+							IsPresented = false;
+						}
 						break;
-					case (int)MenuItemType.AboutTheArt:
-						MenuPages.Add(id, new NavigationPage(new AboutPage()));
+					case "Categories":
+						{
+							Detail = new NavigationPage(new Categories());
+							IsPresented = false;
+						}
 						break;
-					case (int)MenuItemType.Login:
-						MenuPages.Add(id, new NavigationPage(new LoginPage()));
+					case "Profile":
+						{
+							Detail.Navigation.PushAsync(new Profile());
+							IsPresented = false;
+						}
 						break;
 				}
 			}
-
-			var newPage = MenuPages[id];
-
-			if (newPage != null && Detail != newPage)
+			catch (Exception ex)
 			{
-				Detail = newPage;
 
-				if (Device.RuntimePlatform == Device.Android)
-					await Task.Delay(100);
-
-				IsPresented = false;
 			}
 		}
+	}
+
+	public class MenuItems
+	{
+		public string OptionName { get; set; }
 	}
 }

@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace LimerickStreetArt.MobileForms.Views
+namespace LimerickStreetArtApp.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AboutPage : ContentPage
+	public partial class Profile : ContentPage
 	{
-		public AboutPage()
+		public Profile()
 		{
-
+			InitializeComponent();
 		}
 	}
 }

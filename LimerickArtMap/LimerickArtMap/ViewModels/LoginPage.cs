@@ -5,7 +5,6 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using LimerickStreetArt;
-using LimerickStreetArtApp.Services;
 
 namespace LimerickStreetArt.MobileForms.ViewModels
 {

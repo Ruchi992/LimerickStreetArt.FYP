@@ -1,9 +1,6 @@
-﻿
-
-
-
-namespace LimerickStreetArt.MobileForms.Views
+﻿namespace LimerickStreetArt.MobileForms.Views
 {
+	using LimerickStreetArt.MobileForms.ViewModels;
 	using Models;
 	using System;
 	using System.Collections.Generic;
@@ -14,42 +11,26 @@ namespace LimerickStreetArt.MobileForms.Views
 	// Learn more about making custom code visible in the Xamarin.Forms previewer
 	// by visiting https://aka.ms/xamarinforms-previewer
 	[DesignTimeVisible(false)]
+
+	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainPage : MasterDetailPage
 	{
-		Dictionary<int, NavigationPage> MenuPages = new Dictionary<int, NavigationPage>();
 		public MainPage()
 		{
 			InitializeComponent();
 
-			MasterBehavior = MasterBehavior.Popover;
-
-			MenuPages.Add((int)MenuItemType.Search, (NavigationPage)Detail);
+			this.Title = "master";
+			BindingContext = new MasterMenuViewModels();
+			MessagingCenter.Subscribe<MasterMenu>(this, "OpenMenu", (Menu) =>
+			{
+				this.Detail = new NavigationPage((Page)Activator.CreateInstance(Menu.TargetType));
+				IsPresented = false;
+			});
 		}
 
-		public async Task NavigateFromMenu(int id)
+		private void InitializeComponent()
 		{
-			if (!MenuPages.ContainsKey(id))
-			{
-				switch (id)
-				{
-					case (int)MenuItemType.Search:
-						MenuPages.Add(id, new NavigationPage(new RegisterPage()));
-						break;
-
-				}
-			}
-
-			var newPage = MenuPages[id];
-
-			if (newPage != null && Detail != newPage)
-			{
-				Detail = newPage;
-
-				if (Device.RuntimePlatform == Device.Android)
-					await Task.Delay(100);
-
-				IsPresented = false;
-			}
+			throw new NotImplementedException();
 		}
 	}
 }

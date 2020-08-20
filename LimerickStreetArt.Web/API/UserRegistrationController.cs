@@ -1,5 +1,6 @@
 ﻿using LimerickStreetArt.Repository;
 using LimerickStreetArt.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,8 +8,10 @@ using System.Collections.Generic;
 
 namespace LimerickStreetArt.Web.API
 {
-	[Route("api/[controller]")]
-	[ApiController]
+	[Authorize]
+	[Route("api/UserAccount")]
+	//[Route("api/[controller]")]
+	//[ApiController]
 	public class UserRegistrationController : ControllerBase
 	{
 		private UserAccountRepository UserAccountRepository { get; }
