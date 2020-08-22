@@ -2,6 +2,7 @@
 {
 	using LimerickStreetArt.Repository;
 	using LimerickStreetArt.Web.Models;
+	using Microsoft.AspNetCore.Authorization;
 	using Microsoft.AspNetCore.Http;
 	using Microsoft.AspNetCore.Mvc;
 	using System;
@@ -10,9 +11,12 @@
 	[ApiController]
 	public class UserAccountController : ControllerBase
 	{
+
+
 		private UserAccountRepository UserAccountRepository { get; }
 
 		public UserAccountController(UserAccountRepository userAccountRepository)
+
 		{
 			UserAccountRepository = userAccountRepository;
 		}

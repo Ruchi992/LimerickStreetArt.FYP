@@ -6,9 +6,11 @@ using Xamarin.Forms;
 
 namespace LimerickStreetArtApp.ViewModels
 {
-	class RegisterPage
+	using LimerickStreetArt.Services;
+	using Services;
+	public class RegisterPage : Page
 	{
-		readonly ApiServices _apiservices = ApiServiceFactory.GetApiServices();
+		readonly ApiService _apiservice;
 		public String Password { get; set; }
 
 		public String ReconformPassword { get; set; }
@@ -25,7 +27,7 @@ namespace LimerickStreetArtApp.ViewModels
 				return new Command(async () =>
 				{
 
-					var isSuccess = await _apiservices.RegisterAsync(
+					var isSuccess = await _apiservice.RegisterAsync(
 						email: Email,
 						username: Username,
 						dateOfBirth: DateOfBirth,

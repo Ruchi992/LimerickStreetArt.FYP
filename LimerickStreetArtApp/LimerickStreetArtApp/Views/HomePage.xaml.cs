@@ -10,15 +10,16 @@ using Xamarin.Forms.Xaml;
 namespace LimerickStreetArtApp.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class RegisterPage : ContentPage
+	public partial class HomePage : ContentPage
 	{
-		public RegisterPage()
+		public HomePage()
 		{
 			InitializeComponent();
-
 		}
-		void Handle_Clicked(object sender, System.EventArgs e)
+
+		async void Handle_Clicked(object sender, EventArgs e)
 		{
+			await Navigation.PushAsync(new LoginPage());
 
 		}
 	}

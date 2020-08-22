@@ -6,36 +6,35 @@
              xmlns:viewModels="clr-namespace:LimerickStreetArtApp.Views"
              mc:Ignorable="d"
              x:Class="LimerickStreetArtApp.Views.RegisterPage">
-    <ContentPage.BindingContext>
-        <viewModels:RegisterPage />
-    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Grid Margin="0,20,20,0" VerticalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-    <StackLayout Orientation="Vertical"
-                 VerticalOptions="Center"
-                 Spacing="20"
-                 Padding="20">
-
-        <Entry Text="{Binding Username}"
-               Placeholder="username" />
-        <Entry Text="{Binding Password}" 
-               Placeholder="password"
-               IsPassword="True" />
-        <Entry Text="{Binding ConfirmPassword}"
-               Placeholder="confirm password"
-               IsPassword="True" />
-
-        <Button Command="{Binding RegisterCommand}" 
-                Text="Register"
-                TextColor="White"
-                FontSize="30"
-                BackgroundColor="DeepPink" />
-
-        <Label Text="{Binding Message}"
-               HorizontalOptions="Center"/>
-
-        <Button Text="Go to Login"
-                Clicked="Button_OnClicked"/>
-
-    </StackLayout>
-
+                    <StackLayout Grid.Row="0">
+                        <Entry Placeholder="UserName" FontSize="16" x:Name="EntryUserName"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="1">
+                        <Entry Placeholder="Password" IsPassword="True" FontSize="16" x:Name="EntryPassword"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="2">
+                        <Entry Placeholder="UserConfirmPassword" FontSize="16" x:Name="EntryConfirmPassword"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="3">
+                        <Entry Placeholder="UserEmail" FontSize="16" x:Name="EntryEmail"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="4">
+                        <Button Text="Register" HorizontalOptions="CenterAndExpand" WidthRequest="100" TextColor="White" BackgroundColor="Black" Clicked ="Handle_Clicked"/>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>

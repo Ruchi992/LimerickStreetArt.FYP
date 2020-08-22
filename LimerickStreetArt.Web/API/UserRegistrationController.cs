@@ -10,8 +10,9 @@ namespace LimerickStreetArt.Web.API
 {
 	[Authorize]
 	[Route("api/UserAccount")]
-	//[Route("api/[controller]")]
+	[Route("api/[controller]")]
 	//[ApiController]
+
 	public class UserRegistrationController : ControllerBase
 	{
 		private UserAccountRepository UserAccountRepository { get; }

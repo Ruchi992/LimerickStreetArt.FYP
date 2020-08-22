@@ -16,5 +16,10 @@ namespace LimerickStreetArtApp.Views
 		{
 			InitializeComponent();
 		}
+
+		async void Handle_Clicked(object sender, EventArgs e)
+		{
+			await Navigation.PushAsync(new RegisterPage());
+		}
 	}
 }

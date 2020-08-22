@@ -18,7 +18,7 @@ BackgroundColor="White" HorizontalOptions="FillAndExpand">
 WidthRequest="100" VerticalOptions="Center" />
 
                                 <StackLayout Orientation="Vertical">
-                                    <Label Text="Panda Profile" HorizontalTextAlignment="Start" FontSize="Large"
+                                    <Label Text="Panda Profil" HorizontalTextAlignment="Start" FontSize="Large"
 Margin="2,0,0,0" HorizontalOptions="Start" VerticalOptions="EndAndExpand" TextColor="Black"/>
                                     <Label Text="Xamarin Forms" HorizontalTextAlignment="Start"
 FontSize="Small" Margin="2,0,0,0" HorizontalOptions="Start"
@@ -69,7 +69,7 @@ TextColor="#4a4848"/>
 
     <MasterDetailPage.Detail>
         <ContentPage>
-            <Label Text="Welcome to Panda App" FontSize="Large"/>
+            <Label Text="Welcome to Limerick App" FontSize="Large"/>
         </ContentPage>
 
     </MasterDetailPage.Detail>
