@@ -11,18 +11,14 @@
 
 	public class HomeController : Controller
 	{
-		private readonly StreetArtRepository _streetArtRepository;
-		//private readonly ILogger<HomeController> _logger;
-		//ILogger<HomeController> logger,
-		public HomeController(IConfiguration configuration)
-		{
-			var databaseClass = new DatabaseClass
-			{
-				ConnectionString = configuration.GetConnectionString("LocalDatabase"),
-			};
-			_streetArtRepository = new StreetArtRepositoryClass(databaseClass);
+		private readonly StreetArtRepository streetArtRepository;
 
-			///_logger = logger;
+		public HomeController(StreetArtRepository streetArtRepository)
+		{
+
+			this.streetArtRepository = streetArtRepository;
+
+
 		}
 
 		public IActionResult Index()
@@ -31,7 +27,7 @@
 		}
 		public IActionResult ArtMap()
 		{
-			List<StreetArt> streetArtList = _streetArtRepository.GetStreetArtList();
+			List<StreetArt> streetArtList = streetArtRepository.GetStreetArtList();
 			return View(streetArtList);
 		}
 

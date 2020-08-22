@@ -17,11 +17,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimerickStreetArt.Web", "Li
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5A7C84AC-44C4-4DC0-B9CA-5B6C239918FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickArtMap.Android", "LimerickArtMap\LimerickArtMap.Android\LimerickArtMap.Android.csproj", "{D3D28BD9-9F98-494E-A5D4-53801D413055}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickStreetArt.AndroidApp", "LimerickArtMap\LimerickArtMap.Android\LimerickStreetArt.AndroidApp.csproj", "{D3D28BD9-9F98-494E-A5D4-53801D413055}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F5398C35-3BD8-4CE6-AA5C-93F084F0EAE3} = {F5398C35-3BD8-4CE6-AA5C-93F084F0EAE3}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickArtMap.iOS", "LimerickArtMap\LimerickArtMap.iOS\LimerickArtMap.iOS.csproj", "{8763AC3D-0372-446D-A9EB-10336534A067}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickStreetArt.iOSApp", "LimerickArtMap\LimerickArtMap.iOS\LimerickStreetArt.iOSApp.csproj", "{8763AC3D-0372-446D-A9EB-10336534A067}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickArtMap", "LimerickArtMap\LimerickArtMap\LimerickArtMap.csproj", "{F5398C35-3BD8-4CE6-AA5C-93F084F0EAE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LimerickStreetArt.MobileForms", "LimerickArtMap\LimerickArtMap\LimerickStreetArt.MobileForms.csproj", "{F5398C35-3BD8-4CE6-AA5C-93F084F0EAE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{9DF80610-4A02-4E3D-B79D-CF6489410CEF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MobileApp", "MobileApp", "{6638430F-5F0D-43A1-9238-2A3E11CECC8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5CBEB88-E1C4-4EDB-9B7D-2387C84B64F1}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickStreetArtApp.Android", "LimerickStreetArtApp\LimerickStreetArtApp.Android\LimerickStreetArtApp.Android.csproj", "{43668602-9676-4AF2-812F-BEF5757624BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickStreetArtApp.iOS", "LimerickStreetArtApp\LimerickStreetArtApp.iOS\LimerickStreetArtApp.iOS.csproj", "{B9557566-4E06-4A70-A01A-5C77F9B8BD90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimerickStreetArtApp", "LimerickStreetArtApp\LimerickStreetArtApp\LimerickStreetArtApp.csproj", "{91584483-740B-4EE1-A5E1-85DCB3D42706}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -143,12 +161,57 @@ Global
 		{F5398C35-3BD8-4CE6-AA5C-93F084F0EAE3}.Release|iPhone.Build.0 = Release|Any CPU
 		{F5398C35-3BD8-4CE6-AA5C-93F084F0EAE3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{F5398C35-3BD8-4CE6-AA5C-93F084F0EAE3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Debug|iPhone.Deploy.0 = Debug|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Debug|iPhoneSimulator.Deploy.0 = Debug|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Release|iPhone.Build.0 = Release|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Release|iPhone.Deploy.0 = Release|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{43668602-9676-4AF2-812F-BEF5757624BB}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{B9557566-4E06-4A70-A01A-5C77F9B8BD90}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{B9557566-4E06-4A70-A01A-5C77F9B8BD90}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{B9557566-4E06-4A70-A01A-5C77F9B8BD90}.Debug|iPhone.Build.0 = Debug|iPhone
+		{B9557566-4E06-4A70-A01A-5C77F9B8BD90}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{B9557566-4E06-4A70-A01A-5C77F9B8BD90}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{B9557566-4E06-4A70-A01A-5C77F9B8BD90}.Release|Any CPU.ActiveCfg = Release|iPhone
+		{B9557566-4E06-4A70-A01A-5C77F9B8BD90}.Release|iPhone.ActiveCfg = Release|iPhone
+		{B9557566-4E06-4A70-A01A-5C77F9B8BD90}.Release|iPhone.Build.0 = Release|iPhone
+		{B9557566-4E06-4A70-A01A-5C77F9B8BD90}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{B9557566-4E06-4A70-A01A-5C77F9B8BD90}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{91584483-740B-4EE1-A5E1-85DCB3D42706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91584483-740B-4EE1-A5E1-85DCB3D42706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91584483-740B-4EE1-A5E1-85DCB3D42706}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{91584483-740B-4EE1-A5E1-85DCB3D42706}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{91584483-740B-4EE1-A5E1-85DCB3D42706}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{91584483-740B-4EE1-A5E1-85DCB3D42706}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{91584483-740B-4EE1-A5E1-85DCB3D42706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91584483-740B-4EE1-A5E1-85DCB3D42706}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91584483-740B-4EE1-A5E1-85DCB3D42706}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{91584483-740B-4EE1-A5E1-85DCB3D42706}.Release|iPhone.Build.0 = Release|Any CPU
+		{91584483-740B-4EE1-A5E1-85DCB3D42706}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{91584483-740B-4EE1-A5E1-85DCB3D42706}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{C5AA00FF-D608-4093-8329-B8F392CA2CBC} = {9DF80610-4A02-4E3D-B79D-CF6489410CEF}
 		{74B42C7C-08DD-4421-A342-D865C890A186} = {5A7C84AC-44C4-4DC0-B9CA-5B6C239918FA}
+		{9992C195-85CF-432A-9D61-096ECB8A68C4} = {9DF80610-4A02-4E3D-B79D-CF6489410CEF}
+		{D3D28BD9-9F98-494E-A5D4-53801D413055} = {6638430F-5F0D-43A1-9238-2A3E11CECC8A}
+		{8763AC3D-0372-446D-A9EB-10336534A067} = {6638430F-5F0D-43A1-9238-2A3E11CECC8A}
+		{F5398C35-3BD8-4CE6-AA5C-93F084F0EAE3} = {6638430F-5F0D-43A1-9238-2A3E11CECC8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C5E935CA-0179-484C-B4B4-2ECF7CC48204}

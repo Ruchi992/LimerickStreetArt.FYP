@@ -59,7 +59,6 @@ namespace LimerickStreetArt.MySQL.UnitTests
 			sut.Delete(newStreetArt);
 		}
 		[TestMethod]
-		[Ignore]
 		public void TestGetById()
 		{
 			int id = 3;
