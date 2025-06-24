@@ -22,13 +22,9 @@
 		private readonly IMapper _mapper;
 		private readonly StreetArtRepository streetArtRepository;
 
-		public StreetArtController(IConfiguration configuration, IMapper mapper, IWebHostEnvironment env)
+		public StreetArtController(IMapper mapper, IWebHostEnvironment env, StreetArtRepository streetArtRepository)
 		{
-			var databaseClass = new DatabaseClass
-			{
-				ConnectionString = configuration.GetConnectionString("LocalDatabase"),
-			};
-			streetArtRepository = new StreetArtRepositoryClass(databaseClass);
+			this.streetArtRepository = streetArtRepository;
 			_mapper = mapper;
 			_env = env;
 
